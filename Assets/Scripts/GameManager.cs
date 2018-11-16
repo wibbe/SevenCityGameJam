@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public Player player = null;
     public GravityWell gravityWellPrefab = null;
     public Transform gravityWellParent = null;
+    public Transform starParent = null;
     public GameObject stars = null;
     public int starCount = 400;
     public float gameAreaSize = 400f;
@@ -17,7 +18,7 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < starCount; i++)
         {
-            Instantiate(stars, new Vector3(Random.Range(-gameAreaSize, gameAreaSize), Random.Range(-gameAreaSize, gameAreaSize), Random.Range(-10f, -50f)), Quaternion.identity);
+            Instantiate(stars, new Vector3(Random.Range(-gameAreaSize, gameAreaSize), Random.Range(-gameAreaSize, gameAreaSize), Random.Range(10f, 50f)), Quaternion.identity, starParent);
         }
     }
 
@@ -25,9 +26,12 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetMouseButtonUp(0))
         {
-            Debug.Log("Clicked!");
-
-            Vector3 spawnPosition = mainCamera.ScreenPointToRay(Input.mousePosition).origin;
+            //Debug.Log("Clicked!");
+            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+            Plane plane = new Plane(Vector3.forward, Vector3.zero);
+            float distance;
+            plane.Raycast(ray, out distance);
+            Vector3 spawnPosition = ray.GetPoint(distance);
             spawnPosition.z = 0f;
 
             GravityWell well = Instantiate<GravityWell>(gravityWellPrefab, spawnPosition, Quaternion.identity, gravityWellParent);

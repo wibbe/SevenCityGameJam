@@ -43,4 +43,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b1cd7150a834aa4d842ad9324d62d7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
+  mainCamera: {fileID: 0}
+  player: {fileID: 0}
+  gravityWellPrefab: {fileID: 0}
+  gravityWellParent: {fileID: 0}
+  starParent: {fileID: 0}
+  stars: {fileID: 0}
+  starCount: 800
+  gameAreaSize: 400
