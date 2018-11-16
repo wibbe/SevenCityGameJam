@@ -8,6 +8,18 @@ public class GameManager : MonoBehaviour
     public Player player = null;
     public GravityWell gravityWellPrefab = null;
     public Transform gravityWellParent = null;
+    public GameObject stars = null;
+    public int starCount = 400;
+    public float gameAreaSize = 400f;
+
+
+    private void Start()
+    {
+        for (int i = 0; i < starCount; i++)
+        {
+            Instantiate(stars, new Vector3(Random.Range(-gameAreaSize, gameAreaSize), Random.Range(-gameAreaSize, gameAreaSize), Random.Range(-10f, -50f)), Quaternion.identity);
+        }
+    }
 
     private void Update()
     {
@@ -19,7 +31,6 @@ public class GameManager : MonoBehaviour
             spawnPosition.z = 0f;
 
             GravityWell well = Instantiate<GravityWell>(gravityWellPrefab, spawnPosition, Quaternion.identity, gravityWellParent);
-            well.AffectPlayer(player);
         }
     }
 
