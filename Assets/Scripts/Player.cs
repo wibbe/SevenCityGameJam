@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.ParticleSystem;
@@ -12,6 +13,12 @@ public class Player : MonoBehaviour
     public float minScale = 1f;
     public float maxScale = 3f;
     public GameManager gameManager = null;
+    public AudioClip defeatClip = null;
+    public AudioClip victoryClip = null;
+    public AudioSource audioSource = null;
+    public AudioSource flyAudioSource = null;
+    public GameObject pickupEffectPrefab = null;
+    public GameObject collisionEffectPrefab = null;
 
     private Rigidbody m_body = null;
 
@@ -34,6 +41,7 @@ public class Player : MonoBehaviour
         
         if (energy <= 0.0f)
         {
+            flyAudioSource.Stop();
             gameManager.EndGame();
             // Explode or just disapear
         }
@@ -61,6 +69,7 @@ public class Player : MonoBehaviour
         {
             energy += other.gameObject.GetComponent<Pickup>().energyLevel;
             Destroy(other.gameObject);
+            Instantiate(pickupEffectPrefab, transform.position, Quaternion.identity);
         }
     }
 
@@ -69,6 +78,22 @@ public class Player : MonoBehaviour
     	if (other.gameObject.CompareTag("Rock"))
         {
         	energy -= other.gameObject.GetComponent<Rock>().energyLevel;
-    	}
+            Instantiate(collisionEffectPrefab, transform.position, Quaternion.identity);
+        }
+    }
+
+    public void PlayDefeatSound()
+    {
+        PlaySound(defeatClip);
+    }
+
+    public void PlayVictorySound()
+    {
+        PlaySound(victoryClip);
+    }
+
+    private void PlaySound(AudioClip clip)
+    {
+        audioSource.PlayOneShot(clip);
     }
 }

@@ -161,7 +161,8 @@ public class GameManager : MonoBehaviour
             TextMeshProUGUI textMesh = victoryText.GetComponent<TextMeshProUGUI>();
             textMesh.text = "Victory\nScore: " + player.energy;
             victoryText.SetActive(true);
-            EndGame();
+            player.PlayVictorySound();
+            StartCoroutine(End(2.0f));
         }
 
         energyLevel.sizeDelta = new Vector2((player.energy / maxEnergy) * 600f, 10f);
@@ -200,6 +201,7 @@ public class GameManager : MonoBehaviour
     public void EndGame()
     {
         gameOverText.SetActive(true);
+        player.PlayDefeatSound();
         // End game
         StartCoroutine(End(2.0f));
         
