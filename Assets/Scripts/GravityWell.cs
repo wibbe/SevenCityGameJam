@@ -47,8 +47,6 @@ public class GravityWell : MonoBehaviour
 
         if (other.tag == "Player")
         {
-            float playerEnergyFactor = other.GetComponent<Player>().energy * 3f / 30.0f;
-            Debug.Log(playerEnergyFactor);
             Vector3 dir = transform.position - other.attachedRigidbody.position;
             float distance = dir.magnitude;
             dir *= 1f / distance;

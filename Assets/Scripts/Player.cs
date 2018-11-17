@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.ParticleSystem;
@@ -11,9 +12,25 @@ public class Player : MonoBehaviour
     public float speed = 30.0f;
     public float minScale = 1f;
     public float maxScale = 3f;
-    public GameManager gameManager = null;
 
+    [Space]
+    public GameManager gameManager = null;
+    public CameraManager cameraManager = null;
+
+    [Space]
+    public AudioClip defeatClip = null;
+    public AudioClip victoryClip = null;
+    public AudioSource audioSource = null;
+    public AudioSource flyAudioSource = null;
+
+    [Space]
+    public GameObject pickupEffectPrefab = null;
+    public GameObject collisionEffectPrefab = null;
+    public GameObject bounceEffectPrefab = null;
+    
     private Rigidbody m_body = null;
+    private float timeSinceLastCollision;
+    private float timeSinceLastBounce;
 
     private void Start()
     {
@@ -23,6 +40,8 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        timeSinceLastCollision += Time.deltaTime;
+        timeSinceLastBounce += Time.deltaTime;
         if (energy > 0f)
         {
             energy -= energyDecay * Time.deltaTime;
@@ -34,6 +53,7 @@ public class Player : MonoBehaviour
         
         if (energy <= 0.0f)
         {
+            flyAudioSource.Stop();
             gameManager.EndGame();
             // Explode or just disapear
         }
@@ -61,14 +81,40 @@ public class Player : MonoBehaviour
         {
             energy += other.gameObject.GetComponent<Pickup>().energyLevel;
             Destroy(other.gameObject);
+            Instantiate(pickupEffectPrefab, transform.position, Quaternion.identity);
+            cameraManager.Shake(0.3f);
         }
     }
 
     private void OnCollisionEnter(Collision other)
     {
-    	if (other.gameObject.CompareTag("Rock"))
+    	if (other.gameObject.CompareTag("Rock") && timeSinceLastCollision > 1.0f)
         {
-        	energy -= other.gameObject.GetComponent<Rock>().energyLevel;
-    	}
+            timeSinceLastCollision = 0.0f;
+            energy -= other.gameObject.GetComponent<Rock>().energyLevel;
+            Instantiate(collisionEffectPrefab, transform.position, Quaternion.identity);
+            cameraManager.Shake(1.0f);
+        }
+        else if (other.gameObject.CompareTag("Edge") && timeSinceLastBounce > 0.3f)
+        {
+            timeSinceLastBounce = 0.0f;
+            Instantiate(bounceEffectPrefab, transform.position, Quaternion.identity);
+            cameraManager.Shake(0.6f);
+        }
+    }
+
+    public void PlayDefeatSound()
+    {
+        PlaySound(defeatClip);
+    }
+
+    public void PlayVictorySound()
+    {
+        PlaySound(victoryClip);
+    }
+
+    private void PlaySound(AudioClip clip)
+    {
+        audioSource.PlayOneShot(clip);
     }
 }

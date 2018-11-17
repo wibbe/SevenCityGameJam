@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1224284738936906505}
   m_Layer: 0
   m_Name: EdgeRock08
-  m_TagString: Untagged
+  m_TagString: Edge
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -115,6 +115,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: e7ea3e6869b04a74b8a68849b3634e21, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e7ea3e6869b04a74b8a68849b3634e21, type: 3}
+      propertyPath: m_TagString
+      value: Edge
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7ea3e6869b04a74b8a68849b3634e21, type: 3}
