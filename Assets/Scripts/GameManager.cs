@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
 
 
     [Space]
+    public bool spawnRocks = true;
+    public bool spawnPickups = true;
     public int rocksCount = 400;
     public int pickupCount = 40;
     public int backgroundCount = 300;
@@ -52,10 +54,13 @@ public class GameManager : MonoBehaviour
             m_freeGravityWells.Enqueue(shaderID);
         }
 
-        for (int i = 0; i < rocksCount; i++)
+        if (spawnRocks)
         {
-            int type = UnityEngine.Random.Range(0, rockPrefabs.Length);
-            Instantiate(rockPrefabs[type], new Vector3(UnityEngine.Random.Range(-gameAreaSize, gameAreaSize), UnityEngine.Random.Range(-gameAreaSize, gameAreaSize), 0f), Quaternion.identity, rockParent);
+            for (int i = 0; i < rocksCount; i++)
+            {
+                int type = UnityEngine.Random.Range(0, rockPrefabs.Length);
+                Instantiate(rockPrefabs[type], new Vector3(UnityEngine.Random.Range(-gameAreaSize, gameAreaSize), UnityEngine.Random.Range(-gameAreaSize, gameAreaSize), 0f), Quaternion.identity, rockParent);
+            }
         }
 
         for (int i = 0; i < backgroundCount; i++)
@@ -64,9 +69,12 @@ public class GameManager : MonoBehaviour
             Instantiate(backgroundPrefabs[type], new Vector3(UnityEngine.Random.Range(-gameAreaSize, gameAreaSize), UnityEngine.Random.Range(-gameAreaSize, gameAreaSize), UnityEngine.Random.Range(minDistance, maxDistance)), Quaternion.identity, rockParent);
         }
 
-        for (int i = 0; i < pickupCount; i++)
+        if (spawnPickups)
         {
-            Instantiate(pickup, new Vector3(UnityEngine.Random.Range(-gameAreaSize, gameAreaSize), UnityEngine.Random.Range(-gameAreaSize, gameAreaSize), 0f), Quaternion.identity, pickupParent);
+            for (int i = 0; i < pickupCount; i++)
+            {
+                Instantiate(pickup, new Vector3(UnityEngine.Random.Range(-gameAreaSize, gameAreaSize), UnityEngine.Random.Range(-gameAreaSize, gameAreaSize), 0f), Quaternion.identity, pickupParent);
+            }
         }
     }
 
