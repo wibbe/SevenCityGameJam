@@ -1073,7 +1073,7 @@ MonoBehaviour:
   minDistance: 30
   maxDistance: 100
   maxGravityWells: 5
-  energySuccessFaction: 0.6
+  energySuccessFaction: 0.5
   gameOverText: {fileID: 1710864253}
   victoryText: {fileID: 1770153254}
   energyLevel: {fileID: 8175304830246126523}
