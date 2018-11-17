@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: WaterRipple
   m_Shader: {fileID: 210, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: EFFECT_BUMP _ALPHABLEND_ON _NORMALMAP
+  m_ShaderKeywords: EFFECT_BUMP _ALPHABLEND_ON _EMISSION _NORMALMAP
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -37,11 +37,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
-        m_Texture: {fileID: 2800000, guid: 8ed4f18f263651d4b865df353c6c8fa8, type: 3}
+        m_Texture: {fileID: 2800000, guid: 8d70d986e15d9da44b5613619eaed358, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 7b9256b309e8bd746bb5c0f0ea5cb73a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 8d70d986e15d9da44b5613619eaed358, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -68,16 +68,16 @@ Material:
     - _DetailNormalMapScale: 1
     - _DistortionBlend: 1
     - _DistortionEnabled: 1
-    - _DistortionStrength: 500
-    - _DistortionStrengthScaled: 50
+    - _DistortionStrength: 250
+    - _DistortionStrengthScaled: 25
     - _DstBlend: 1
-    - _EmissionEnabled: 0
+    - _EmissionEnabled: 1
     - _FlipbookMode: 0
     - _GlossMapScale: 1
-    - _Glossiness: 0
+    - _Glossiness: 0.102
     - _GlossyReflections: 1
     - _LightingEnabled: 1
-    - _Metallic: 0
+    - _Metallic: 0.094
     - _Mode: 4
     - _OcclusionStrength: 1
     - _Parallax: 0.02
@@ -91,7 +91,7 @@ Material:
     - _ZWrite: 0
     m_Colors:
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 0.5176471}
     - _ColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
-    - _EmissionColor: {r: 0.20612317, g: 0.21626914, b: 0.2264151, a: 1}
+    - _EmissionColor: {r: 0.57062274, g: 0, b: 0.99858975, a: 1}
     - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
