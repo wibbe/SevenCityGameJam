@@ -173,9 +173,10 @@ public class GameManager : MonoBehaviour
             portal.SetActive(true);
         }
 
-        if(!gameOver && energyLeft < successEnergy || player.energy <= 0.0f)
+        if(!gameOver && ((player.energy + energyLeft) < successEnergy || player.energy <= 0.0f))
         {
             // Game over
+            Debug.LogFormat("Game Over - EnergyLeft: {0}, SuccessEnergy: {1}, PlayerEnergy: {2}", energyLeft, successEnergy, player.energy);
             gameOver = true;
             player.PlayDefeatSound();
             StartCoroutine(End(2.0f));
