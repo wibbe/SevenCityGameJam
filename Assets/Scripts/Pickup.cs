@@ -5,6 +5,7 @@ using UnityEngine;
 public class Pickup : MonoBehaviour
 {
     public float rotationSpeed = 0;
+    public float energyLevel;
     public Transform target = null;
     
     private Rigidbody m_rigidbody;

@@ -37,8 +37,10 @@ public class GameManager : MonoBehaviour
     [Space]
     public GameObject gameOverText = null;
     public GameObject victoryText = null;
+    public RectTransform energyLevel = null;
 
     private Queue<int> m_freeGravityWells = new Queue<int>();
+    public float maxEnergy { get; private set; }
 
 
 
@@ -84,13 +86,20 @@ public class GameManager : MonoBehaviour
                 Instantiate(pickup, new Vector3(UnityEngine.Random.Range(-gameAreaSize, gameAreaSize), UnityEngine.Random.Range(-gameAreaSize, gameAreaSize), 0f), Quaternion.identity, pickupParent);
             }
         }
-        else
+
+        // Starting energy
+        maxEnergy = player.energy;
+
+        Pickup[] pickups = FindObjectsOfType<Pickup>();
+        for (int i = 0; i < pickups.Length; i++)
         {
-            // Move Pickups to the Pickup parent so victory logic still works
-            Pickup[] pickups = FindObjectsOfType<Pickup>();
-            for (int i = 0; i < pickups.Length; i++)
+            if (pickups[i].transform.parent != pickupParent)
                 pickups[i].transform.SetParent(pickupParent, true);
+
+            maxEnergy += pickups[i].energyLevel;
         }
+
+        Debug.LogFormat("Max energy {0} from {1} pickups", maxEnergy, pickups.Length);
     }
 
     private void Update()
@@ -116,6 +125,8 @@ public class GameManager : MonoBehaviour
             victoryText.SetActive(true);
             EndGame();
         }
+
+        energyLevel.sizeDelta = new Vector2((player.energy / maxEnergy) * 600f, 10f);
     }
 
     public void EndGame()

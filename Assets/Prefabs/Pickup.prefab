@@ -108,6 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 20
+  energyLevel: 5
   target: {fileID: 0}
 --- !u!54 &3464884211801004946
 Rigidbody:

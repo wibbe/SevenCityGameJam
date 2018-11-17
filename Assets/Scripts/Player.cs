@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     public float energyDecay = 1.0f;
     public float speed = 30.0f;
     public float minScale = 1f;
-    public float energyScaleFactor = 10f;
+    public float maxScale = 3f;
     public GameManager gameManager = null;
 
     private Rigidbody m_body = null;
@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
         if (energy > 0f)
         {
             energy -= energyDecay * Time.deltaTime;
-            float scale = Mathf.Max(minScale, energy / energyScaleFactor);
+            float scale = Mathf.Lerp(minScale, maxScale, energy / gameManager.maxEnergy);
             transform.localScale = new Vector3(scale, scale, scale);
             MainModule ps = GetComponentInChildren<ParticleSystem>().main;
             ps.startSizeMultiplier = scale;
@@ -58,7 +58,7 @@ public class Player : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Pickup") && Vector3.Distance(transform.position, other.transform.position) < Mathf.Max(1.0f, 4.0f * energy / 10.0f))
         {
-            energy += 5f;
+            energy += other.gameObject.GetComponent<Pickup>().energyLevel;
             Destroy(other.gameObject);
         }
     }
