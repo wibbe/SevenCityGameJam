@@ -21,10 +21,26 @@ public class GameManager : MonoBehaviour
     public float gameAreaSize = 400f;
     public float minDistance = 30f;
     public float maxDistance = 100f;
+    public int maxGravityWells = 5;
 
+    private Queue<int> m_freeGravityWells = new Queue<int>();
+
+
+
+    public void RemoveWell(int shaderUniform)
+    {
+        Shader.SetGlobalVector(shaderUniform, new Vector4(0f, 0f, 0f, -1f));
+        m_freeGravityWells.Enqueue(shaderUniform);
+    }
 
     private void Start()
     {
+        for (int i = 0; i < maxGravityWells; i++)
+        {
+            int shaderID = Shader.PropertyToID(string.Format("_gravityWell{0}", i));
+            m_freeGravityWells.Enqueue(shaderID);
+        }
+
         for (int i = 0; i < rocksCount; i++)
         {
             int type = Random.Range(0, rockPrefabs.Length);
@@ -39,9 +55,8 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) && m_freeGravityWells.Count > 0)
         {
-            //Debug.Log("Clicked!");
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             Plane plane = new Plane(Vector3.forward, Vector3.zero);
             float distance;
@@ -50,7 +65,8 @@ public class GameManager : MonoBehaviour
             spawnPosition.z = 0f;
 
             GravityWell well = Instantiate<GravityWell>(gravityWellPrefab, spawnPosition, Quaternion.identity, gravityWellParent);
+            int shaderUniform = m_freeGravityWells.Dequeue();
+            well.Register(this, shaderUniform);
         }
     }
-
 }

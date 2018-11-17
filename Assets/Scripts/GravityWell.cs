@@ -12,11 +12,18 @@ public class GravityWell : MonoBehaviour
     public SphereCollider m_collider;
 
     private float m_currentLife = 0f;
+    private GameManager m_manager = null;
+    private int m_shaderUniformID = -1;
 
-
-    private void Start()
+    public void Register(GameManager manager, int shaderUniformID)
     {
-        //m_collider.radius = 1.2f;
+        m_manager = manager;
+        m_shaderUniformID = shaderUniformID;
+    }
+
+    private void OnDestroy()
+    {
+        m_manager.RemoveWell(m_shaderUniformID);
     }
 
     private void Update()
@@ -26,6 +33,9 @@ public class GravityWell : MonoBehaviour
 
         float scale = radius * sizeAnimation.Evaluate(m_currentLife / life);
         transform.localScale = new Vector3(scale, scale, scale);
+
+        Vector3 pos = transform.position;
+        Shader.SetGlobalVector(m_shaderUniformID, new Vector4(pos.x, pos.y, pos.z, scale));
 
         if (m_currentLife > life)
             Destroy(gameObject);
