@@ -77,11 +77,15 @@ public class Player : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("Pickup") && Vector3.Distance(transform.position, other.transform.position) < Mathf.Max(1.0f, 4.0f * energy / 10.0f))
+        if (other.gameObject.CompareTag("Pickup") && Vector3.Distance(transform.position, other.transform.position) < Mathf.Lerp(minScale + 1f, maxScale + 1f, energy / gameManager.maxEnergy))
         {
-            energy += other.gameObject.GetComponent<Pickup>().energyLevel;
+            float energyLevel = other.gameObject.GetComponent<Pickup>().energyLevel;
+            energy += energyLevel;
+            gameManager.RemoveEnergyLeft(energyLevel);
+
             Destroy(other.gameObject);
             Instantiate(pickupEffectPrefab, transform.position, Quaternion.identity);
+
             cameraManager.Shake(0.3f);
         }
     }
