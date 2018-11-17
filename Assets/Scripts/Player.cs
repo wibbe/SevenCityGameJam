@@ -50,13 +50,6 @@ public class Player : MonoBehaviour
         	MainModule ps = GetComponentInChildren<ParticleSystem>().main;
         	ps.startSizeMultiplier = scale;
         }
-        
-        if (energy <= 0.0f)
-        {
-            flyAudioSource.Stop();
-            gameManager.EndGame();
-            // Explode or just disapear
-        }
     }
 
     private void FixedUpdate()
