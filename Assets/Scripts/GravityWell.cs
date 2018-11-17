@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GravityWell : MonoBehaviour
 {
-    public float maxForce = 30f;
+    public float force = 30f;
     public float life = 3f;
     public float radius = 10f;
     public AnimationCurve sizeAnimation;
@@ -12,11 +12,18 @@ public class GravityWell : MonoBehaviour
     public SphereCollider m_collider;
 
     private float m_currentLife = 0f;
+    private GameManager m_manager = null;
+    private int m_shaderUniformID = -1;
 
-
-    private void Start()
+    public void Register(GameManager manager, int shaderUniformID)
     {
-        //m_collider.radius = 1.2f;
+        m_manager = manager;
+        m_shaderUniformID = shaderUniformID;
+    }
+
+    private void OnDestroy()
+    {
+        m_manager.RemoveWell(m_shaderUniformID);
     }
 
     private void Update()
@@ -26,6 +33,9 @@ public class GravityWell : MonoBehaviour
 
         float scale = radius * sizeAnimation.Evaluate(m_currentLife / life);
         transform.localScale = new Vector3(scale, scale, scale);
+
+        Vector3 pos = transform.position;
+        Shader.SetGlobalVector(m_shaderUniformID, new Vector4(pos.x, pos.y, pos.z, scale));
 
         if (m_currentLife > life)
             Destroy(gameObject);
@@ -37,6 +47,8 @@ public class GravityWell : MonoBehaviour
 
         if (other.tag == "Player")
         {
+            float playerEnergyFactor = Mathf.Max(other.GetComponent<Player>().energy * 1.5f / 25.0f, 0.5f);
+            Debug.Log(playerEnergyFactor);
             Vector3 dir = transform.position - other.attachedRigidbody.position;
             float distance = dir.magnitude;
             dir *= 1f / distance;
@@ -44,7 +56,7 @@ public class GravityWell : MonoBehaviour
             distance = 1f - Mathf.Clamp01(distance / radius);
             distance *= distance;
 
-            other.attachedRigidbody.AddForce(dir * maxForce * distance);
+            other.attachedRigidbody.AddForce(dir * force * playerEnergyFactor * distance);
         }
     }
 }
