@@ -18,7 +18,8 @@ public class GameManager : MonoBehaviour
     public GameObject[] rockPrefabs = new GameObject[0];
     public GameObject[] backgroundPrefabs = new GameObject[0];
     public GameObject pickup = null;
-
+    public GameObject playerPrefab = null;
+    public Transform spawnPosition;
 
 
     [Space]
@@ -42,6 +43,13 @@ public class GameManager : MonoBehaviour
     {
         Shader.SetGlobalVector(shaderUniform, new Vector4(0f, 0f, 0f, -1f));
         m_freeGravityWells.Enqueue(shaderUniform);
+    }
+
+    private void OnEnable()
+    {
+        player = Instantiate<GameObject>(playerPrefab, spawnPosition.position, Quaternion.identity).GetComponent<Player>();
+        player.gameManager = this;
+        mainCamera.GetComponent<FollowObject>().target = player.gameObject.transform;
     }
 
     private void Start()
