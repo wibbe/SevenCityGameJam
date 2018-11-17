@@ -136,6 +136,8 @@ MonoBehaviour:
     type: 3}
   collisionEffectPrefab: {fileID: 2239066425987261653, guid: b59d6ee3b4590d7439f7e114f56de59a,
     type: 3}
+  bounceEffectPrefab: {fileID: 5899037862887501464, guid: 64299932ec383ef42b29de008d506100,
+    type: 3}
 --- !u!54 &2634806439290976944
 Rigidbody:
   m_ObjectHideFlags: 0
