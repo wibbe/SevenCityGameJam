@@ -432,12 +432,12 @@ PrefabInstance:
     - target: {fileID: 9189712742391028557, guid: 04c75cf89739beb40a8b5288d6dce50c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 369
       objectReference: {fileID: 0}
     - target: {fileID: 9189712742391028557, guid: 04c75cf89739beb40a8b5288d6dce50c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 777
       objectReference: {fileID: 0}
     - target: {fileID: 9189712742391028557, guid: 04c75cf89739beb40a8b5288d6dce50c,
         type: 3}
@@ -488,6 +488,34 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Backdrop
+      objectReference: {fileID: 0}
+    - target: {fileID: 885721299, guid: 04c75cf89739beb40a8b5288d6dce50c, type: 3}
+      propertyPath: resolutionX
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 885721299, guid: 04c75cf89739beb40a8b5288d6dce50c, type: 3}
+      propertyPath: resolutionY
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 986205516, guid: 04c75cf89739beb40a8b5288d6dce50c, type: 3}
+      propertyPath: resolutionX
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 986205516, guid: 04c75cf89739beb40a8b5288d6dce50c, type: 3}
+      propertyPath: resolutionY
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 1817660231, guid: 04c75cf89739beb40a8b5288d6dce50c, type: 3}
+      propertyPath: resolutionX
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 1817660231, guid: 04c75cf89739beb40a8b5288d6dce50c, type: 3}
+      propertyPath: resolutionY
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 885721298, guid: 04c75cf89739beb40a8b5288d6dce50c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04c75cf89739beb40a8b5288d6dce50c, type: 3}

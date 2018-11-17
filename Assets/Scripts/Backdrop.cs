@@ -19,4 +19,22 @@ public class Backdrop : MonoBehaviour
 				Instantiate(prefab, new Vector3(xx, yy, transform.position.z), Quaternion.identity, transform);
 			}
 	}
+
+    private void OnDrawGizmosSelected()
+    {
+        int halfX = resolutionX / 2;
+        int halfY = resolutionY / 2;
+        float sizeX = size / transform.localScale.x;
+        float sizeY = size / transform.localScale.y;
+        Vector3 lowerLeft = Vector3.left * halfX * -sizeX + Vector3.down * halfY * -sizeY;
+        Vector3 upperLeft = Vector3.left * halfX * -sizeX + Vector3.down * halfY * sizeY;
+        Vector3 lowerRight= Vector3.left * halfX * sizeX + Vector3.down * halfY * -sizeY;
+        Vector3 upperRight= Vector3.left * halfX * sizeX + Vector3.down * halfY * sizeY;
+        Gizmos.color = Color.yellow;
+        Gizmos.matrix = transform.localToWorldMatrix;
+        Gizmos.DrawLine(lowerLeft, upperLeft);
+        Gizmos.DrawLine(upperLeft, upperRight);
+        Gizmos.DrawLine(upperRight, lowerRight);
+        Gizmos.DrawLine(lowerRight, lowerLeft);
+    }
 }
