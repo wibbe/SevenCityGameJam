@@ -125,7 +125,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   force: 500
   life: 2
-  radius: 20
+  radius: 25
   sizeAnimation:
     serializedVersion: 2
     m_Curve:

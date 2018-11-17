@@ -30,6 +30,7 @@ public class Player : MonoBehaviour
     
     private Rigidbody m_body = null;
     private float timeSinceLastCollision;
+    private float timeSinceLastBounce;
 
     private void Start()
     {
@@ -40,6 +41,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         timeSinceLastCollision += Time.deltaTime;
+        timeSinceLastBounce += Time.deltaTime;
         if (energy > 0f)
         {
             energy -= energyDecay * Time.deltaTime;
@@ -97,8 +99,9 @@ public class Player : MonoBehaviour
             Instantiate(collisionEffectPrefab, transform.position, Quaternion.identity);
             cameraManager.Shake(1.0f);
         }
-        else if (other.gameObject.CompareTag("Edge"))
+        else if (other.gameObject.CompareTag("Edge") && timeSinceLastBounce > 0.3f)
         {
+            timeSinceLastBounce = 0.0f;
             Instantiate(bounceEffectPrefab, transform.position, Quaternion.identity);
             cameraManager.Shake(0.6f);
         }
