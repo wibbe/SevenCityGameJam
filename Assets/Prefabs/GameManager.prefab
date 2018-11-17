@@ -549,6 +549,7 @@ MonoBehaviour:
   backgroundPrefabs:
   - {fileID: 1636165053682408540, guid: 0a29dcc26a3bf5b4c85cf3ea039aca12, type: 3}
   - {fileID: 7607187070574680065, guid: d1787ff80b8bb224fa86d7671c123660, type: 3}
+  - {fileID: 1636165053682408540, guid: 8bc78860f0ad2aa4a867681f7d6d472d, type: 3}
   pickup: {fileID: 6203228016824358646, guid: 8eb6ed96406476143b6ba22797d4c908, type: 3}
   spawnRocks: 0
   spawnPickups: 0
