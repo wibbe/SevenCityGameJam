@@ -119,8 +119,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialForce: 100
   energy: 20
-  energyDecay: 1
+  energyDecay: 0.5
   speed: 50
+  minScale: 1
+  energyScaleFactor: 10
   gameManager: {fileID: 0}
 --- !u!54 &2634806439290976944
 Rigidbody:

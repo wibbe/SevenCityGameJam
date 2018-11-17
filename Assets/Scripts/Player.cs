@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
     public float energy = 25.0f;
     public float energyDecay = 1.0f;
     public float speed = 30.0f;
+    public float minScale = 1f;
+    public float energyScaleFactor = 10f;
     public GameManager gameManager = null;
 
     private Rigidbody m_body = null;
@@ -21,14 +23,18 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        energy -= energyDecay * Time.deltaTime;
-        transform.localScale = new Vector3(energy / 10.0f, energy / 10.0f, energy / 10.0f);
-        MainModule ps = GetComponentInChildren<ParticleSystem>().main;
-        ps.startSizeMultiplier = energy / 10.0f;
-        if (energy <= 0.0f)
+        if (energy > 0f)
         {
-            gameManager.EndGame();
-            // Explode or just disapear
+            energy -= energyDecay * Time.deltaTime;
+            float scale = Mathf.Max(minScale, energy / energyScaleFactor);
+            transform.localScale = new Vector3(scale, scale, scale);
+            MainModule ps = GetComponentInChildren<ParticleSystem>().main;
+            ps.startSizeMultiplier = scale;
+            if (energy <= 0.0f)
+            {
+                gameManager.EndGame();
+                // Explode or just disapear
+            }
         }
     }
 

@@ -7,6 +7,9 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    public int seed = 7463883;
+
+    [Space]
     public Camera mainCamera = null;
     public Player player = null;
     public GravityWell gravityWellPrefab = null;
@@ -15,9 +18,9 @@ public class GameManager : MonoBehaviour
     public Transform pickupParent = null;
 
     [Space]
+    public GameObject pickup = null;
     public GameObject[] rockPrefabs = new GameObject[0];
     public GameObject[] backgroundPrefabs = new GameObject[0];
-    public GameObject pickup = null;
 
 
     [Space]
@@ -51,6 +54,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        UnityEngine.Random.InitState(seed);
+
         for (int i = 0; i < maxGravityWells; i++)
         {
             int shaderID = Shader.PropertyToID(string.Format("_GravityWell{0}", i));
@@ -79,6 +84,13 @@ public class GameManager : MonoBehaviour
                 Instantiate(pickup, new Vector3(UnityEngine.Random.Range(-gameAreaSize, gameAreaSize), UnityEngine.Random.Range(-gameAreaSize, gameAreaSize), 0f), Quaternion.identity, pickupParent);
             }
         }
+        else
+        {
+            // Move Pickups to the Pickup parent so victory logic still works
+            Pickup[] pickups = FindObjectsOfType<Pickup>();
+            for (int i = 0; i < pickups.Length; i++)
+                pickups[i].transform.SetParent(pickupParent, true);
+        }
     }
 
     private void Update()
@@ -95,14 +107,14 @@ public class GameManager : MonoBehaviour
             GravityWell well = Instantiate<GravityWell>(gravityWellPrefab, spawnPosition, Quaternion.identity, gravityWellParent);
             int shaderUniform = m_freeGravityWells.Dequeue();
             well.Register(this, shaderUniform);
+        }
 
-            if(pickupParent.childCount <= 0)
-            {
-                TextMeshProUGUI textMesh = victoryText.GetComponent<TextMeshProUGUI>();
-                textMesh.text = "Victory\nScore: " + player.energy;
-                victoryText.SetActive(true);
-                End(3.0f);
-            }
+        if (!victoryText.activeSelf && pickupParent.childCount <= 0)
+        {
+            TextMeshProUGUI textMesh = victoryText.GetComponent<TextMeshProUGUI>();
+            textMesh.text = "Victory\nScore: " + player.energy;
+            victoryText.SetActive(true);
+            EndGame();
         }
     }
 
