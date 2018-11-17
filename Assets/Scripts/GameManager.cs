@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using Skillster.Animation;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class GameManager : MonoBehaviour
     public Camera mainCamera = null;
     public Player player = null;
     public GravityWell gravityWellPrefab = null;
+    public Transform portalPrefab = null;
     public Transform gravityWellParent = null;
     public Transform rockParent = null;
     public Transform pickupParent = null;
@@ -33,14 +35,25 @@ public class GameManager : MonoBehaviour
     public float minDistance = 30f;
     public float maxDistance = 100f;
     public int maxGravityWells = 5;
+
+    [Space]
+    public float energySuccessFaction = 0.6f;
     
     [Space]
     public GameObject gameOverText = null;
     public GameObject victoryText = null;
     public RectTransform energyLevel = null;
+    public RectTransform winLevel = null;
+    public CanvasGroup pauseMenu = null;
+
 
     private Queue<int> m_freeGravityWells = new Queue<int>();
+    private bool m_pauseMenuVisible = false;
+    private bool m_animatingPauseMenu = false;
+    private bool m_inputEnabled = true;
+
     public float maxEnergy { get; private set; }
+    public float successEnergy {  get { return maxEnergy * energySuccessFaction; } }
 
 
 
@@ -48,6 +61,17 @@ public class GameManager : MonoBehaviour
     {
         Shader.SetGlobalVector(shaderUniform, new Vector4(0f, 0f, 0f, -1f));
         m_freeGravityWells.Enqueue(shaderUniform);
+    }
+
+    public void OnContinue()
+    {
+        if (m_pauseMenuVisible && !m_animatingPauseMenu)
+            ContinueGame();
+    }
+
+    public void OnQuit()
+    {
+        SceneManager.LoadScene(0);
     }
 
     private void OnEnable()
@@ -99,12 +123,26 @@ public class GameManager : MonoBehaviour
             maxEnergy += pickups[i].energyLevel;
         }
 
+        winLevel.anchoredPosition = new Vector2(600f * energySuccessFaction, 0f);
+
         Debug.LogFormat("Max energy {0} from {1} pickups", maxEnergy, pickups.Length);
     }
 
     private void Update()
     {
-        if (Input.GetMouseButtonUp(0) && m_freeGravityWells.Count > 0)
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (!m_pauseMenuVisible && !m_animatingPauseMenu)
+            {
+                PauseGame();
+            }
+            else if (m_pauseMenuVisible && !m_animatingPauseMenu)
+            {
+                ContinueGame();
+            }
+        }
+
+        if (m_inputEnabled && Input.GetMouseButtonUp(0) && m_freeGravityWells.Count > 0)
         {
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             Plane plane = new Plane(Vector3.forward, Vector3.zero);
@@ -127,6 +165,36 @@ public class GameManager : MonoBehaviour
         }
 
         energyLevel.sizeDelta = new Vector2((player.energy / maxEnergy) * 600f, 10f);
+    }
+
+    private void PauseGame()
+    {
+        m_pauseMenuVisible = true;
+        m_animatingPauseMenu = true;
+        m_inputEnabled = false;
+        pauseMenu.gameObject.SetActive(true);
+        pauseMenu.alpha = 0f;
+
+        Tween.Callback(1f, 0f, 0.4f, (float t) => { Time.timeScale = t; });
+
+        Tween.Track().Alpha(pauseMenu, 1f, 0.4f).Action(() =>
+        {
+            m_animatingPauseMenu = false;
+        });
+    }
+
+    private void ContinueGame()
+    {
+        Tween.Track().Alpha(pauseMenu, 0f, 0.4f).Action(() =>
+        {
+            m_animatingPauseMenu = false;
+            m_pauseMenuVisible = false;
+            pauseMenu.gameObject.SetActive(false);
+
+            m_inputEnabled = true;
+        });
+
+        Tween.Track().Delay(0.2f).Callback(0f, 1f, 0.4f, (float t) => { Time.timeScale = t; });
     }
 
     public void EndGame()
