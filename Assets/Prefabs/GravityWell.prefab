@@ -123,7 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxForce: 400
-  life: 3
+  life: 2
   radius: 20
   sizeAnimation:
     serializedVersion: 2
@@ -138,8 +138,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.3487295
     - serializedVersion: 3
-      time: 0.099481046
-      value: 1.0024071
+      time: 0.07023758
+      value: 0.99528503
       inSlope: -0.0031319878
       outSlope: -0.0031319878
       tangentMode: 0
@@ -147,13 +147,13 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.15078947
     - serializedVersion: 3
-      time: 0.9004304
-      value: 0.99704874
-      inSlope: 0.011515044
-      outSlope: 0.011515044
+      time: 0.7745079
+      value: 0.58536625
+      inSlope: -1.6024475
+      outSlope: -1.6024475
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.09756792
+      inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 1.0012817

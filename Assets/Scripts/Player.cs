@@ -25,23 +25,26 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Pickup")
+        if(other.gameObject.CompareTag("Pickup"))
         {
             other.GetComponent<Pickup>().target = transform;
         }
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerStay(Collider other)
     {
-        Debug.Log(other.collider.name);
-    	if (other.gameObject.CompareTag("Rock"))
-        {
-    		Debug.Log("Game Over");
-    	}
-        else if (other.gameObject.CompareTag("Pickup"))
+        if (other.gameObject.CompareTag("Pickup") && Vector3.Distance(transform.position, other.transform.position) > 1.0f)
         {
             maxSpeed += 5f;
             Destroy(other.gameObject);
         }
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+    	if (other.gameObject.CompareTag("Rock"))
+        {
+    		Debug.Log("Game Over");
+    	}
     }
 }
