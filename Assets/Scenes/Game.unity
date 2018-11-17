@@ -198,7 +198,7 @@ GameObject:
   - component: {fileID: 343410925}
   - component: {fileID: 343410924}
   - component: {fileID: 343410923}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Post-process Volume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -357,7 +357,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534669902}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -20}
+  m_LocalPosition: {x: 0, y: 0, z: -100}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -575,6 +575,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 186096334348916872, guid: b9dc7d353083ddf4e8458a6a4d259397,
+        type: 3}
+      propertyPath: rockPrefabs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8076251157032634788, guid: b9dc7d353083ddf4e8458a6a4d259397,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -693,6 +698,18 @@ PrefabInstance:
       propertyPath: pickup
       value: 
       objectReference: {fileID: 6203228016824358646, guid: 8eb6ed96406476143b6ba22797d4c908,
+        type: 3}
+    - target: {fileID: 186096334348916872, guid: b9dc7d353083ddf4e8458a6a4d259397,
+        type: 3}
+      propertyPath: rockPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 1636165053682408540, guid: c7fe03c003f66874e9c590996f8c0077,
+        type: 3}
+    - target: {fileID: 186096334348916872, guid: b9dc7d353083ddf4e8458a6a4d259397,
+        type: 3}
+      propertyPath: rockPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 6208335350454489022, guid: 9b5b7c9a0862fdf46afdb4a49a323f3f,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9dc7d353083ddf4e8458a6a4d259397, type: 3}

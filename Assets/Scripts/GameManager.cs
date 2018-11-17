@@ -9,23 +9,19 @@ public class GameManager : MonoBehaviour
     public GravityWell gravityWellPrefab = null;
     public Transform gravityWellParent = null;
     public Transform starParent = null;
-    public Transform pickupParent = null;
-    public GameObject stars = null;
-    public GameObject pickup = null;
+    public GameObject[] rockPrefabs = new GameObject[0];
     public int starCount = 400;
-    public int pickupCount = 40;
     public float gameAreaSize = 400f;
+    public float minDistance = 30f;
+    public float maxDistance = 100f;
 
 
     private void Start()
     {
         for (int i = 0; i < starCount; i++)
         {
-            Instantiate(stars, new Vector3(Random.Range(-gameAreaSize, gameAreaSize), Random.Range(-gameAreaSize, gameAreaSize), Random.Range(10f, 50f)), Quaternion.identity, starParent);
-        }
-        for (int i = 0; i < pickupCount; i++)
-        {
-            Instantiate(pickup, new Vector3(Random.Range(-gameAreaSize, gameAreaSize), Random.Range(-gameAreaSize, gameAreaSize), 0f), Quaternion.identity, pickupParent);
+            int type = Random.Range(0, rockPrefabs.Length);
+            Instantiate(rockPrefabs[type], new Vector3(Random.Range(-gameAreaSize, gameAreaSize), Random.Range(-gameAreaSize, gameAreaSize), Random.Range(minDistance, maxDistance)), Quaternion.identity, starParent);
         }
     }
 
