@@ -5,8 +5,10 @@ using UnityEngine;
 public class Pickup : MonoBehaviour
 {
     public float rotationSpeed = 0;
-
+    public Transform target = null;
+    
     private Rigidbody m_rigidbody;
+    private float pullTime = 2.0f;
     
     // Start is called before the first frame update
     void Start()
@@ -18,17 +20,10 @@ public class Pickup : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Player")
+        if(target != null)
         {
-            Debug.Log("Nice explosion");
-            other.GetComponentInParent<Player>().maxSpeed += 5f;
-            Destroy(gameObject);
-            // add count
+            transform.position = Vector3.Lerp(transform.position, target.position, 2.0f - pullTime);
+            pullTime -= Time.deltaTime;
         }
     }
 }
