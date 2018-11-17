@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -31,6 +32,7 @@ public class GameManager : MonoBehaviour
     
     [Space]
     public GameObject gameOverText = null;
+    public GameObject victoryText = null;
 
     private Queue<int> m_freeGravityWells = new Queue<int>();
 
@@ -82,11 +84,20 @@ public class GameManager : MonoBehaviour
             GravityWell well = Instantiate<GravityWell>(gravityWellPrefab, spawnPosition, Quaternion.identity, gravityWellParent);
             int shaderUniform = m_freeGravityWells.Dequeue();
             well.Register(this, shaderUniform);
+
+            if(pickupParent.childCount <= 0)
+            {
+                TextMeshProUGUI textMesh = victoryText.GetComponent<TextMeshProUGUI>();
+                textMesh.text = "Victory\nScore: " + player.energy;
+                victoryText.SetActive(true);
+                End(3.0f);
+            }
         }
     }
 
     public void EndGame()
     {
+        gameOverText.SetActive(true);
         // End game
         StartCoroutine(End(2.0f));
         
@@ -95,7 +106,6 @@ public class GameManager : MonoBehaviour
     private IEnumerator End(float endTime)
     {
         float time = 0.0f;
-        gameOverText.SetActive(true);
         while (time < endTime)
         {
             time += Time.deltaTime;

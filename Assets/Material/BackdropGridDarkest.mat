@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BackdropGrid
+  m_Name: BackdropGridDarkest
   m_Shader: {fileID: 4800000, guid: 9e57807fbc1c0f34e96b8d15457669f6, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -63,17 +63,17 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _Intensity: 1.54
+    - _Intensity: 0.05
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _PullStrength: 1
+    - _PullStrength: 2.22
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.8202114, g: 0, b: 1, a: 1}
+    - _Color: {r: 0.8202114, g: 0, b: 1, a: 0.76862746}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
