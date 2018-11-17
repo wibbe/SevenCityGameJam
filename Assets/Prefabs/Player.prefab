@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialForce: 100
-  maxSpeed: 10
+  maxSpeed: 20
 --- !u!54 &2634806439290976944
 Rigidbody:
   m_ObjectHideFlags: 0
