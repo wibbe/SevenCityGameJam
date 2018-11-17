@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
     public GameObject gameOverText = null;
     public GameObject victoryText = null;
     public RectTransform energyLevel = null;
+    public RectTransform energyLeftInLevel = null;
     public RectTransform winLevel = null;
     public CanvasGroup pauseMenu = null;
 
@@ -53,6 +54,7 @@ public class GameManager : MonoBehaviour
     private bool m_inputEnabled = true;
 
     public float maxEnergy { get; private set; }
+    public float energyLeft { get; private set; }
     public float successEnergy {  get { return maxEnergy * energySuccessFaction; } }
 
 
@@ -61,6 +63,11 @@ public class GameManager : MonoBehaviour
     {
         Shader.SetGlobalVector(shaderUniform, new Vector4(0f, 0f, 0f, -1f));
         m_freeGravityWells.Enqueue(shaderUniform);
+    }
+
+    public void RemoveEnergyLeft(float amount)
+    {
+        energyLeft -= amount;
     }
 
     public void OnContinue()
@@ -124,6 +131,8 @@ public class GameManager : MonoBehaviour
             maxEnergy += pickups[i].energyLevel;
         }
 
+        energyLeft = maxEnergy - player.energy;
+
         winLevel.anchoredPosition = new Vector2(600f * energySuccessFaction, 0f);
 
         Debug.LogFormat("Max energy {0} from {1} pickups", maxEnergy, pickups.Length);
@@ -167,6 +176,7 @@ public class GameManager : MonoBehaviour
         }
 
         energyLevel.sizeDelta = new Vector2((player.energy / maxEnergy) * 600f, 10f);
+        energyLeftInLevel.sizeDelta = new Vector2(((player.energy + energyLeft) / maxEnergy) * 600f, 10f);
     }
 
     private void PauseGame()
