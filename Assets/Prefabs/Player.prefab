@@ -118,9 +118,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialForce: 100
-  maxSpeed: 40
-  energy: 10
+  energy: 20
   energyDecay: 0.4
+  speed: 40
   gameManager: {fileID: 0}
 --- !u!54 &2634806439290976944
 Rigidbody:
@@ -4938,5 +4938,5 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 8
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GravityWell : MonoBehaviour
 {
-    public float force = 30f;
+    public float force = 400f;
     public float life = 3f;
     public float radius = 10f;
     public AnimationCurve sizeAnimation;
@@ -47,7 +47,7 @@ public class GravityWell : MonoBehaviour
 
         if (other.tag == "Player")
         {
-            float playerEnergyFactor = Mathf.Max(other.GetComponent<Player>().energy * 1.5f / 25.0f, 0.5f);
+            float playerEnergyFactor = other.GetComponent<Player>().energy * 3f / 30.0f;
             Debug.Log(playerEnergyFactor);
             Vector3 dir = transform.position - other.attachedRigidbody.position;
             float distance = dir.magnitude;
@@ -56,7 +56,7 @@ public class GravityWell : MonoBehaviour
             distance = 1f - Mathf.Clamp01(distance / radius);
             distance *= distance;
 
-            other.attachedRigidbody.AddForce(dir * force * playerEnergyFactor * distance);
+            other.attachedRigidbody.AddForce(dir * force * distance);
         }
     }
 }

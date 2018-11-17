@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     public float initialForce = 100f;
     public float energy = 25.0f;
     public float energyDecay = 1.0f;
-    public float minSpeed = 10.0f;
+    public float speed = 30.0f;
     public GameManager gameManager = null;
 
     private Rigidbody m_body = null;
@@ -36,7 +36,7 @@ public class Player : MonoBehaviour
     {
         Vector3 velocity = m_body.velocity;
         velocity.Normalize();
-        m_body.velocity = velocity * Mathf.Max(energy * 2.0f, minSpeed);
+        m_body.velocity = velocity * speed;
         m_body.AddForce(velocity * initialForce);
     }
 
@@ -53,7 +53,7 @@ public class Player : MonoBehaviour
         if (other.gameObject.CompareTag("Pickup") && Vector3.Distance(transform.position, other.transform.position) < 4.0f)
         {
             Debug.Log(Vector3.Distance(transform.position, other.transform.position));
-            energy += 2f;
+            energy += 5f;
             Destroy(other.gameObject);
         }
     }
