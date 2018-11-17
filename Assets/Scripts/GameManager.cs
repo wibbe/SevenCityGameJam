@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < maxGravityWells; i++)
         {
-            int shaderID = Shader.PropertyToID(string.Format("_gravityWell{0}", i));
+            int shaderID = Shader.PropertyToID(string.Format("_GravityWell{0}", i));
             m_freeGravityWells.Enqueue(shaderID);
         }
 
