@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public Transform pickupParent = null;
 
     [Space]
+    public GameObject portal = null;
     public GameObject pickup = null;
     public GameObject[] rockPrefabs = new GameObject[0];
     public GameObject[] backgroundPrefabs = new GameObject[0];
@@ -52,6 +53,7 @@ public class GameManager : MonoBehaviour
     private bool m_pauseMenuVisible = false;
     private bool m_animatingPauseMenu = false;
     private bool m_inputEnabled = true;
+    private bool gameOver = false;
 
     public float maxEnergy { get; private set; }
     public float energyLeft { get; private set; }
@@ -152,7 +154,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (m_inputEnabled && Input.GetMouseButtonUp(0) && m_freeGravityWells.Count > 0)
+        if (!gameOver && m_inputEnabled && Input.GetMouseButtonUp(0) && m_freeGravityWells.Count > 0)
         {
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             Plane plane = new Plane(Vector3.forward, Vector3.zero);
@@ -166,17 +168,29 @@ public class GameManager : MonoBehaviour
             well.Register(this, shaderUniform);
         }
 
-        if (!victoryText.activeSelf && pickupParent.childCount <= 0)
+        if(portal.activeSelf != true && player.energy >= successEnergy) // Open portal
         {
-            TextMeshProUGUI textMesh = victoryText.GetComponent<TextMeshProUGUI>();
-            textMesh.text = "Victory\nScore: " + player.energy;
-            victoryText.SetActive(true);
-            player.PlayVictorySound();
+            portal.SetActive(true);
+        }
+
+        if(!gameOver && energyLeft < successEnergy || player.energy <= 0.0f)
+        {
+            // Game over
+            gameOver = true;
+            player.PlayDefeatSound();
             StartCoroutine(End(2.0f));
         }
 
         energyLevel.sizeDelta = new Vector2((player.energy / maxEnergy) * 600f, 10f);
         energyLeftInLevel.sizeDelta = new Vector2(((player.energy + energyLeft) / maxEnergy) * 600f, 10f);
+    }
+
+    public void EnterPortal()
+    {
+        // Win
+        gameOver = true;
+        player.PlayVictorySound();
+        StartCoroutine(End(2.0f));
     }
 
     private void PauseGame()
@@ -209,21 +223,12 @@ public class GameManager : MonoBehaviour
         Tween.Track().Delay(0.2f).Callback(0f, 1f, 0.4f, (float t) => { Time.timeScale = t; });
     }
 
-    public void EndGame()
-    {
-        gameOverText.SetActive(true);
-        player.PlayDefeatSound();
-        // End game
-        StartCoroutine(End(2.0f));
-        
-    }
-
     private IEnumerator End(float endTime)
     {
         float time = 0.0f;
         while (time < endTime)
         {
-            time += Time.deltaTime;
+            time += Time.unscaledDeltaTime;
             yield return null;
         }
         SceneManager.LoadScene("Menu");
