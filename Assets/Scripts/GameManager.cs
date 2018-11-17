@@ -9,8 +9,11 @@ public class GameManager : MonoBehaviour
     public GravityWell gravityWellPrefab = null;
     public Transform gravityWellParent = null;
     public Transform starParent = null;
+    public Transform pickupParent = null;
     public GameObject stars = null;
+    public GameObject pickup = null;
     public int starCount = 400;
+    public int pickupCount = 40;
     public float gameAreaSize = 400f;
 
 
@@ -19,6 +22,10 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < starCount; i++)
         {
             Instantiate(stars, new Vector3(Random.Range(-gameAreaSize, gameAreaSize), Random.Range(-gameAreaSize, gameAreaSize), Random.Range(10f, 50f)), Quaternion.identity, starParent);
+        }
+        for (int i = 0; i < pickupCount; i++)
+        {
+            Instantiate(pickup, new Vector3(Random.Range(-gameAreaSize, gameAreaSize), Random.Range(-gameAreaSize, gameAreaSize), 0f), Quaternion.identity, pickupParent);
         }
     }
 

@@ -26,14 +26,17 @@ public class GravityWell : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        //Debug.LogFormat("Stay {0}", other.name);
-        Vector3 dir = transform.position - other.attachedRigidbody.position;
-        float distance = dir.magnitude;
-        dir *= 1f / distance;
 
-        distance = 1f - Mathf.Clamp01(distance / radius);
-        distance *= distance;
+        if (other.tag == "Player")
+        {
+            Vector3 dir = transform.position - other.attachedRigidbody.position;
+            float distance = dir.magnitude;
+            dir *= 1f / distance;
 
-        other.attachedRigidbody.AddForce(dir * maxForce * distance);
+            distance = 1f - Mathf.Clamp01(distance / radius);
+            distance *= distance;
+
+            other.attachedRigidbody.AddForce(dir * maxForce * distance);
+        }
     }
 }

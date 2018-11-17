@@ -22,7 +22,7 @@ public class FollowObject: MonoBehaviour
         transform.position = newPos;
 
         //Vector3 newRotation = Vector3.Lerp(transform.eulerAngles, target.eulerAngles, dragTime * Time.deltaTime);
-        Debug.Log(Vector3.Angle(target.GetComponent<Rigidbody>().velocity.normalized, Vector3.up));
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, Vector3.Angle(target.GetComponent<Rigidbody>().velocity.normalized, Vector3.up)));
+        //Debug.Log(Vector3.Angle(target.GetComponent<Rigidbody>().velocity.normalized, Vector3.up));
+        //transform.rotation = Quaternion.Euler(new Vector3(0, 0, Vector3.Angle(target.GetComponent<Rigidbody>().velocity.normalized, Vector3.up)));
     }
 }
