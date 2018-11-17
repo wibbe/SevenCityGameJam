@@ -51,8 +51,8 @@ LightmapSettings:
     m_IndirectOutputScale: 1
     m_AlbedoBoost: 1
     m_EnvironmentLightingMode: 0
-    m_EnableBakedLightmaps: 1
-    m_EnableRealtimeLightmaps: 1
+    m_EnableBakedLightmaps: 0
+    m_EnableRealtimeLightmaps: 0
   m_LightmapEditorSettings:
     serializedVersion: 10
     m_Resolution: 2
@@ -607,7 +607,7 @@ PrefabInstance:
     - target: {fileID: 9189712742391028557, guid: 04c75cf89739beb40a8b5288d6dce50c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9189712742391028557, guid: 04c75cf89739beb40a8b5288d6dce50c,
         type: 3}
@@ -4879,7 +4879,7 @@ Transform:
   - {fileID: 1543772428}
   - {fileID: 512882713}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1600259283
 PrefabInstance:
