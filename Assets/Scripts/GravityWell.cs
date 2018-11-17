@@ -7,19 +7,27 @@ public class GravityWell : MonoBehaviour
     public float maxForce = 30f;
     public float life = 3f;
     public float radius = 10f;
+    public AnimationCurve sizeAnimation;
 
     public SphereCollider m_collider;
+
+    private float m_currentLife = 0f;
 
 
     private void Start()
     {
-        m_collider.radius = radius;
+        //m_collider.radius = 1.2f;
     }
 
     private void Update()
     {
+        m_currentLife += Time.deltaTime;
         life -= Time.deltaTime;
-        if (life < 0f)
+
+        float scale = radius * sizeAnimation.Evaluate(m_currentLife / life);
+        transform.localScale = new Vector3(scale, scale, scale);
+
+        if (m_currentLife > life)
             Destroy(gameObject);
     }
 

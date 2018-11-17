@@ -283,7 +283,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 278019324}
-  dragTime: 2
+  dragTime: 4
+  leadTime: 2
   zHeight: -200
 --- !u!1 &934621149
 GameObject:
