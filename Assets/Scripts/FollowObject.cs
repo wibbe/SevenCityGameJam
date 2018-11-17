@@ -16,6 +16,7 @@ public class FollowObject: MonoBehaviour
     {
         m_targetBody = target.GetComponent<Rigidbody>();
         m_player = target.GetComponent<Player>();
+        transform.position = target.position;
     }
 
     private void Update()
