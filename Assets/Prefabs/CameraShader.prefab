@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3613199321895194877}
   - component: {fileID: 3613199321895194878}
+  - component: {fileID: 1986959393}
   m_Layer: 0
-  m_Name: VirtualCamera
+  m_Name: CameraShader
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69,6 +70,20 @@ MonoBehaviour:
         Culture=neutral, PublicKeyToken=null
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 3613199321928040112}
+--- !u!114 &1986959393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3613199321895194879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a501e808a0330b6499f061fee62b011d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 0.4
+  virtualCamera: {fileID: 3613199321895194878}
 --- !u!1 &3613199321928040113
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,6 +182,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_NoiseProfile: {fileID: 11400000, guid: e48c0d6ff305d7943a8e1b62c0efc907, type: 2}
-  m_AmplitudeGain: 1
-  m_FrequencyGain: 1
+  m_AmplitudeGain: 0
+  m_FrequencyGain: 0
   mNoiseOffsets: {x: 0, y: 0, z: 0}

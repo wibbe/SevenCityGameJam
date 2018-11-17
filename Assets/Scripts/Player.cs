@@ -12,11 +12,18 @@ public class Player : MonoBehaviour
     public float speed = 30.0f;
     public float minScale = 1f;
     public float maxScale = 3f;
+
+    [Space]
     public GameManager gameManager = null;
+    public CameraManager cameraManager = null;
+
+    [Space]
     public AudioClip defeatClip = null;
     public AudioClip victoryClip = null;
     public AudioSource audioSource = null;
     public AudioSource flyAudioSource = null;
+
+    [Space]
     public GameObject pickupEffectPrefab = null;
     public GameObject collisionEffectPrefab = null;
     public GameObject bounceEffectPrefab = null;
@@ -73,6 +80,7 @@ public class Player : MonoBehaviour
             energy += other.gameObject.GetComponent<Pickup>().energyLevel;
             Destroy(other.gameObject);
             Instantiate(pickupEffectPrefab, transform.position, Quaternion.identity);
+            cameraManager.Shake(0.3f);
         }
     }
 
@@ -83,10 +91,12 @@ public class Player : MonoBehaviour
             timeSinceLastCollision = 0.0f;
             energy -= other.gameObject.GetComponent<Rock>().energyLevel;
             Instantiate(collisionEffectPrefab, transform.position, Quaternion.identity);
+            cameraManager.Shake(1.0f);
         }
         else if (other.gameObject.CompareTag("Edge"))
         {
             Instantiate(bounceEffectPrefab, transform.position, Quaternion.identity);
+            cameraManager.Shake(0.6f);
         }
     }
 

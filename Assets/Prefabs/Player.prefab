@@ -128,6 +128,7 @@ MonoBehaviour:
   minScale: 1
   maxScale: 3
   gameManager: {fileID: 0}
+  cameraManager: {fileID: 0}
   defeatClip: {fileID: 8300000, guid: 8a9fdbfdffa50844786ec4388c1b5e11, type: 3}
   victoryClip: {fileID: 8300000, guid: 1ddc38f238f961d4a9db18f0ab6ea5f5, type: 3}
   audioSource: {fileID: 2005194682}
@@ -3972,7 +3973,7 @@ ParticleSystem:
         m_NumAlphaKeys: 2
     range: {x: 0, y: 1}
   CollisionModule:
-    enabled: 1
+    enabled: 0
     serializedVersion: 3
     type: 1
     collisionMode: 0
