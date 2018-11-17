@@ -122,7 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aba721d1fbfdf96448c54aa49c9e2689, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxForce: 200
+  maxForce: 400
   life: 0.5
   radius: 20
   m_collider: {fileID: 9019729559410781936}
