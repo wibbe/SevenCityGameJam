@@ -19,8 +19,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: GlowLinesWall
+    second: {fileID: 2100000, guid: c58040a40191cc84c99eef08e7d3b29c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Matcap
     second: {fileID: 2100000, guid: 7c785a35f04efaa4dab7bcc74d233027, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MatcapWall
+    second: {fileID: 2100000, guid: f8c3933a5b93c6147998cbbf63aeb0f2, type: 2}
   materials:
     importMaterials: 1
     materialName: 1
@@ -60,7 +70,7 @@ ModelImporter:
     importCameras: 1
     importLights: 1
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     optimizeMeshForGPU: 1
     keepQuads: 0
@@ -75,7 +85,7 @@ ModelImporter:
     previousCalculatedGlobalScale: 1
     hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
-    normalSmoothAngle: 60
+    normalSmoothAngle: 0
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
