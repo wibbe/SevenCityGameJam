@@ -45,9 +45,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 0}
   player: {fileID: 0}
-  gravityWellPrefab: {fileID: 0}
+  gravityWellPrefab: {fileID: 4241720625255821473, guid: a3b1d26bdd5e8d94395bc968bf08d3e2,
+    type: 3}
   gravityWellParent: {fileID: 0}
-  starParent: {fileID: 0}
-  stars: {fileID: 0}
-  starCount: 800
+  rockParent: {fileID: 0}
+  pickupParent: {fileID: 0}
+  rockPrefabs:
+  - {fileID: 1636165053682408540, guid: c7fe03c003f66874e9c590996f8c0077, type: 3}
+  - {fileID: 6208335350454489022, guid: 9b5b7c9a0862fdf46afdb4a49a323f3f, type: 3}
+  backgroundPrefabs:
+  - {fileID: 1636165053682408540, guid: 0a29dcc26a3bf5b4c85cf3ea039aca12, type: 3}
+  pickup: {fileID: 6203228016824358646, guid: 8eb6ed96406476143b6ba22797d4c908, type: 3}
+  rocksCount: 10
+  pickupCount: 40
+  backgroundCount: 300
   gameAreaSize: 400
+  minDistance: 30
+  maxDistance: 100
+  maxGravityWells: 5
+  gameOverText: {fileID: 0}
