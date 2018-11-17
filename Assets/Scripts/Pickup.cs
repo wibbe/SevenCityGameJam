@@ -11,15 +11,14 @@ public class Pickup : MonoBehaviour
     private Rigidbody m_rigidbody;
     private float pullTime = 2.0f;
     
-    // Start is called before the first frame update
-    void Start()
+
+    private void Start()
     {
         m_rigidbody = GetComponent<Rigidbody>();
         m_rigidbody.AddTorque(new Vector3(Random.Range(-rotationSpeed, rotationSpeed), Random.Range(-rotationSpeed, rotationSpeed), Random.Range(-rotationSpeed, rotationSpeed)));
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if(target != null)
         {

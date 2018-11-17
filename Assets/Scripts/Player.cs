@@ -26,15 +26,16 @@ public class Player : MonoBehaviour
         if (energy > 0f)
         {
             energy -= energyDecay * Time.deltaTime;
-            float scale = Mathf.Lerp(minScale, maxScale, energy / gameManager.maxEnergy);
-            transform.localScale = new Vector3(scale, scale, scale);
-            MainModule ps = GetComponentInChildren<ParticleSystem>().main;
-            ps.startSizeMultiplier = scale;
-            if (energy <= 0.0f)
-            {
-                gameManager.EndGame();
-                // Explode or just disapear
-            }
+        	float scale = Mathf.Lerp(minScale, maxScale, energy / gameManager.maxEnergy);
+        	transform.localScale = new Vector3(scale, scale, scale);
+        	MainModule ps = GetComponentInChildren<ParticleSystem>().main;
+        	ps.startSizeMultiplier = scale;
+        }
+        
+        if (energy <= 0.0f)
+        {
+            gameManager.EndGame();
+            // Explode or just disapear
         }
     }
 
@@ -67,8 +68,7 @@ public class Player : MonoBehaviour
     {
     	if (other.gameObject.CompareTag("Rock"))
         {
-            gameManager.EndGame();
-    		Debug.Log("Game Over");
+        	energy -= other.gameObject.GetComponent<Rock>().energyLevel;
     	}
     }
 }

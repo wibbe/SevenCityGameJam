@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class Rock : MonoBehaviour
 {
+    public float energyLevel = 20f;
     public float rotationSpeed = 0.4f;
 
     private Rigidbody m_rigidbody = null;
+
 
     private void Start()
     {
