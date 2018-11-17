@@ -52,8 +52,9 @@
             float3 applyWell(float3 vertex, float4 well)
             {
                 float3 wellPos = mul(unity_WorldToObject, well.xyz);
+				wellPos.y = vertex.y;
                 float3 dir = normalize(wellPos - vertex);
-                float strength = well.w < 0 ? 0 : 1 - clamp(distance(wellPos, vertex) / well.w, 0, 1);
+                float strength = well.w <= 0.01 ? 0 : 1 - clamp(distance(wellPos, vertex) / well.w, 0, 1);
                 return vertex + dir * strength * _PullStrength;
             }
 
