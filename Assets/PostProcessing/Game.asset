@@ -65,16 +65,16 @@ MonoBehaviour:
     value: 0
   color:
     overrideState: 1
-    value: {r: 1, g: 0, b: 0, a: 1}
+    value: {r: 0.7664137, g: 0, b: 1, a: 1}
   center:
     overrideState: 0
     value: {x: 0.5, y: 0.5}
   intensity:
     overrideState: 1
-    value: 0.258
+    value: 0.332
   smoothness:
     overrideState: 1
-    value: 0.343
+    value: 0.518
   roundness:
     overrideState: 0
     value: 1
