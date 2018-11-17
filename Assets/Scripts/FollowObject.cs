@@ -16,13 +16,14 @@ public class FollowObject: MonoBehaviour
     {
         m_targetBody = target.GetComponent<Rigidbody>();
         m_player = target.GetComponent<Player>();
+        transform.position = target.position;
     }
 
     private void Update()
     {
         Vector3 newTarget = target.position + m_targetBody.velocity * leadTime;
         float drag = 1 - m_player.energy * 2 / 100.0f;
-        Debug.Log(drag);
+
         Vector3 newPos = Vector3.Lerp(transform.position, newTarget, dragTime * Time.deltaTime);
         newPos.z = zHeight;
         transform.position = newPos;
