@@ -15,11 +15,15 @@ public class GameManager : MonoBehaviour
 
     [Space]
     public GameObject[] rockPrefabs = new GameObject[0];
+    public GameObject[] backgroundPrefabs = new GameObject[0];
     public GameObject pickup = null;
+
+
 
     [Space]
     public int rocksCount = 400;
     public int pickupCount = 40;
+    public int backgroundCount = 300;
     public float gameAreaSize = 400f;
     public float minDistance = 30f;
     public float maxDistance = 100f;
@@ -50,6 +54,12 @@ public class GameManager : MonoBehaviour
         {
             int type = UnityEngine.Random.Range(0, rockPrefabs.Length);
             Instantiate(rockPrefabs[type], new Vector3(UnityEngine.Random.Range(-gameAreaSize, gameAreaSize), UnityEngine.Random.Range(-gameAreaSize, gameAreaSize), 0f), Quaternion.identity, rockParent);
+        }
+
+        for (int i = 0; i < backgroundCount; i++)
+        {
+            int type = UnityEngine.Random.Range(0, backgroundPrefabs.Length);
+            Instantiate(backgroundPrefabs[type], new Vector3(UnityEngine.Random.Range(-gameAreaSize, gameAreaSize), UnityEngine.Random.Range(-gameAreaSize, gameAreaSize), UnityEngine.Random.Range(minDistance, maxDistance)), Quaternion.identity, rockParent);
         }
 
         for (int i = 0; i < pickupCount; i++)

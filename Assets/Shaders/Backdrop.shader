@@ -51,10 +51,12 @@
 
             float3 applyWell(float3 vertex, float4 well)
             {
-                float3 wellPos = mul(unity_WorldToObject, well.xyz);
-				wellPos.y = vertex.y;
+                float3 wellPos = mul(unity_WorldToObject, float4(well.xyz, 1)).xyz;
+				wellPos.z = vertex.z;
                 float3 dir = normalize(wellPos - vertex);
-                float strength = well.w <= 0.01 ? 0 : 1 - clamp(distance(wellPos, vertex) / well.w, 0, 1);
+                float strength = 0;
+                if (well.w > 0)
+                    strength = 1 - clamp(distance(wellPos, vertex) / well.w, 0, 1);
                 return vertex + dir * strength * _PullStrength;
             }
 
@@ -67,6 +69,8 @@
                 result = applyWell(result, _GravityWell2);
                 result = applyWell(result, _GravityWell3);
                 result = applyWell(result, _GravityWell4);
+
+
 
                 o.vertex = UnityObjectToClipPos(float4(result, v.vertex.w));
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);

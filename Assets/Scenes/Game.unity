@@ -839,11 +839,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 186096334348916872, guid: b9dc7d353083ddf4e8458a6a4d259397,
-        type: 3}
-      propertyPath: rockPrefabs.Array.size
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 8076251157032634788, guid: b9dc7d353083ddf4e8458a6a4d259397,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -906,22 +901,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 186096334348916872, guid: b9dc7d353083ddf4e8458a6a4d259397,
         type: 3}
-      propertyPath: Player
-      value: 
-      objectReference: {fileID: 4754626498609225475}
-    - target: {fileID: 186096334348916872, guid: b9dc7d353083ddf4e8458a6a4d259397,
-        type: 3}
-      propertyPath: GravityWellPrefab
-      value: 
-      objectReference: {fileID: 4563076713783928057, guid: a3b1d26bdd5e8d94395bc968bf08d3e2,
-        type: 3}
-    - target: {fileID: 186096334348916872, guid: b9dc7d353083ddf4e8458a6a4d259397,
-        type: 3}
-      propertyPath: MainCamera
-      value: 
-      objectReference: {fileID: 534669904}
-    - target: {fileID: 186096334348916872, guid: b9dc7d353083ddf4e8458a6a4d259397,
-        type: 3}
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 534669904}
@@ -932,49 +911,9 @@ PrefabInstance:
       objectReference: {fileID: 4754626498609225475}
     - target: {fileID: 186096334348916872, guid: b9dc7d353083ddf4e8458a6a4d259397,
         type: 3}
-      propertyPath: gravityWellPrefab
-      value: 
-      objectReference: {fileID: 4241720625255821473, guid: a3b1d26bdd5e8d94395bc968bf08d3e2,
-        type: 3}
-    - target: {fileID: 186096334348916872, guid: b9dc7d353083ddf4e8458a6a4d259397,
-        type: 3}
       propertyPath: gravityWellParent
       value: 
       objectReference: {fileID: 934621150}
-    - target: {fileID: 186096334348916872, guid: b9dc7d353083ddf4e8458a6a4d259397,
-        type: 3}
-      propertyPath: stars
-      value: 
-      objectReference: {fileID: 1636165053682408540, guid: c7fe03c003f66874e9c590996f8c0077,
-        type: 3}
-    - target: {fileID: 186096334348916872, guid: b9dc7d353083ddf4e8458a6a4d259397,
-        type: 3}
-      propertyPath: starParent
-      value: 
-      objectReference: {fileID: 518125894}
-    - target: {fileID: 186096334348916872, guid: b9dc7d353083ddf4e8458a6a4d259397,
-        type: 3}
-      propertyPath: pickupParent
-      value: 
-      objectReference: {fileID: 2066323390}
-    - target: {fileID: 186096334348916872, guid: b9dc7d353083ddf4e8458a6a4d259397,
-        type: 3}
-      propertyPath: pickup
-      value: 
-      objectReference: {fileID: 6203228016824358646, guid: 8eb6ed96406476143b6ba22797d4c908,
-        type: 3}
-    - target: {fileID: 186096334348916872, guid: b9dc7d353083ddf4e8458a6a4d259397,
-        type: 3}
-      propertyPath: rockPrefabs.Array.data[0]
-      value: 
-      objectReference: {fileID: 1636165053682408540, guid: c7fe03c003f66874e9c590996f8c0077,
-        type: 3}
-    - target: {fileID: 186096334348916872, guid: b9dc7d353083ddf4e8458a6a4d259397,
-        type: 3}
-      propertyPath: rockPrefabs.Array.data[1]
-      value: 
-      objectReference: {fileID: 6208335350454489022, guid: 9b5b7c9a0862fdf46afdb4a49a323f3f,
-        type: 3}
     - target: {fileID: 186096334348916872, guid: b9dc7d353083ddf4e8458a6a4d259397,
         type: 3}
       propertyPath: rockParent
@@ -982,9 +921,9 @@ PrefabInstance:
       objectReference: {fileID: 518125894}
     - target: {fileID: 186096334348916872, guid: b9dc7d353083ddf4e8458a6a4d259397,
         type: 3}
-      propertyPath: rocksCount
-      value: 10
-      objectReference: {fileID: 0}
+      propertyPath: pickupParent
+      value: 
+      objectReference: {fileID: 2066323390}
     - target: {fileID: 186096334348916872, guid: b9dc7d353083ddf4e8458a6a4d259397,
         type: 3}
       propertyPath: gameOverText
