@@ -122,7 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aba721d1fbfdf96448c54aa49c9e2689, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 400
+  force: 300
   life: 2
   radius: 20
   sizeAnimation:
@@ -138,8 +138,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.3487295
     - serializedVersion: 3
-      time: 0.20338671
-      value: 0.89018595
+      time: 0.33288807
+      value: 0.88083994
       inSlope: 0.5525517
       outSlope: 0.5525517
       tangentMode: 0
@@ -147,8 +147,8 @@ MonoBehaviour:
       inWeight: 1
       outWeight: 0.4703
     - serializedVersion: 3
-      time: 0.846977
-      value: 0.8592756
+      time: 0.679878
+      value: 0.8732908
       inSlope: -0.82802665
       outSlope: -0.82802665
       tangentMode: 0

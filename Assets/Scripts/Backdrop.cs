@@ -14,8 +14,8 @@ public class Backdrop : MonoBehaviour
 		for (int y = 0; y < resolutionY; y++)
 			for (int x = 0; x < resolutionX; x++)
 			{
-				float xx = (float)x * size;
-				float yy = (float)y * size;
+				float xx = (float)(x - (resolutionX / 2)) * size;
+				float yy = (float)(y - (resolutionY / 2)) * size;
 				Instantiate(prefab, new Vector3(xx, yy, transform.position.z), Quaternion.identity, transform);
 			}
 	}
