@@ -80,6 +80,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1.0f;
         UnityEngine.Random.InitState(seed);
 
         for (int i = 0; i < maxGravityWells; i++)

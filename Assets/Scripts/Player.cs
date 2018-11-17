@@ -19,8 +19,10 @@ public class Player : MonoBehaviour
     public AudioSource flyAudioSource = null;
     public GameObject pickupEffectPrefab = null;
     public GameObject collisionEffectPrefab = null;
-
+    public GameObject bounceEffectPrefab = null;
+    
     private Rigidbody m_body = null;
+    private float timeSinceLastCollision;
 
     private void Start()
     {
@@ -30,6 +32,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        timeSinceLastCollision += Time.deltaTime;
         if (energy > 0f)
         {
             energy -= energyDecay * Time.deltaTime;
@@ -75,10 +78,15 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-    	if (other.gameObject.CompareTag("Rock"))
+    	if (other.gameObject.CompareTag("Rock") && timeSinceLastCollision > 1.0f)
         {
-        	energy -= other.gameObject.GetComponent<Rock>().energyLevel;
+            timeSinceLastCollision = 0.0f;
+            energy -= other.gameObject.GetComponent<Rock>().energyLevel;
             Instantiate(collisionEffectPrefab, transform.position, Quaternion.identity);
+        }
+        else if (other.gameObject.CompareTag("Edge"))
+        {
+            Instantiate(bounceEffectPrefab, transform.position, Quaternion.identity);
         }
     }
 
