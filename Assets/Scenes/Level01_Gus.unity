@@ -2696,16 +2696,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 186096334348916872, guid: b9dc7d353083ddf4e8458a6a4d259397,
         type: 3}
-      propertyPath: spawnRocks
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 186096334348916872, guid: b9dc7d353083ddf4e8458a6a4d259397,
-        type: 3}
-      propertyPath: spawnPickups
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 186096334348916872, guid: b9dc7d353083ddf4e8458a6a4d259397,
-        type: 3}
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 1478165785}

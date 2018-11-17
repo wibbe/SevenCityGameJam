@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &317638017
 RectTransform:
   m_ObjectHideFlags: 0
@@ -548,14 +548,14 @@ MonoBehaviour:
   - {fileID: 6208335350454489022, guid: 9b5b7c9a0862fdf46afdb4a49a323f3f, type: 3}
   backgroundPrefabs:
   - {fileID: 1636165053682408540, guid: 0a29dcc26a3bf5b4c85cf3ea039aca12, type: 3}
+  - {fileID: 7607187070574680065, guid: d1787ff80b8bb224fa86d7671c123660, type: 3}
   pickup: {fileID: 6203228016824358646, guid: 8eb6ed96406476143b6ba22797d4c908, type: 3}
-  playerPrefab: {fileID: 4754626498609225473, guid: 10ce3391d8218ec478c05ba73c57606a,
-    type: 3}
-  spawnPosition: {fileID: 0}
+  spawnRocks: 0
+  spawnPickups: 0
   rocksCount: 10
   pickupCount: 40
-  backgroundCount: 300
-  gameAreaSize: 400
+  backgroundCount: 800
+  gameAreaSize: 1000
   minDistance: 30
   maxDistance: 100
   maxGravityWells: 5
