@@ -8,7 +8,6 @@ public class Player : MonoBehaviour
     public float maxSpeed = 10f;
 
     private Rigidbody m_body = null;
-    private Dictionary<GameObject, float> trappedPickups = new Dictionary<GameObject, float>();
 
     private void Start()
     {
@@ -22,29 +21,29 @@ public class Player : MonoBehaviour
         velocity.Normalize();
         m_body.velocity = velocity * maxSpeed;
         m_body.AddForce(velocity * initialForce);
-
-        //// Pull pickups
-        //foreach (var pickupPair in trappedPickups)
-        //{
-        //    pickupPair.Key.transform.position = Vector3.Lerp(pickupPair.Key.transform.position, transform.position, 2.0f - pickupPair.Value);
-        //    pickupPair.Value -= Time.deltaTime;
-        //}
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.name);
-        if(other.tag == "Pickup")
+        if(other.gameObject.CompareTag("Pickup"))
         {
-            if (!trappedPickups.ContainsKey(other.gameObject))
-                trappedPickups.Add(other.gameObject, 2.0f);
+            other.GetComponent<Pickup>().target = transform;
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("Pickup") && Vector3.Distance(transform.position, other.transform.position) > 1.0f)
+        {
+            maxSpeed += 5f;
+            Destroy(other.gameObject);
         }
     }
 
     private void OnCollisionEnter(Collision other)
     {
     	if (other.gameObject.CompareTag("Rock"))
-    	{
+        {
     		Debug.Log("Game Over");
     	}
     }
