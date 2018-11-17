@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < rocksCount; i++)
         {
             int type = Random.Range(0, rockPrefabs.Length);
-            Instantiate(rockPrefabs[type], new Vector3(Random.Range(-gameAreaSize, gameAreaSize), Random.Range(-gameAreaSize, gameAreaSize), Random.Range(minDistance, maxDistance)), Quaternion.identity, rockParent);
+            Instantiate(rockPrefabs[type], new Vector3(Random.Range(-gameAreaSize, gameAreaSize), Random.Range(-gameAreaSize, gameAreaSize), 0f), Quaternion.identity, rockParent);
         }
 
         for (int i = 0; i < pickupCount; i++)

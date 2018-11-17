@@ -23,4 +23,12 @@ public class Player : MonoBehaviour
         m_body.velocity = velocity * maxSpeed;
         m_body.AddForce(velocity * initialForce);
     }
+
+    private void OnCollisionEnter(Collision other)
+    {
+    	if (other.gameObject.CompareTag("Rock"))
+    	{
+    		Debug.Log("Game Over");
+    	}
+    }
 }
