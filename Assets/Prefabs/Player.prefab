@@ -119,7 +119,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialForce: 100
   energy: 20
-  energyDecay: 0.4
+  energyDecay: 1
   speed: 40
   gameManager: {fileID: 0}
 --- !u!54 &2634806439290976944
