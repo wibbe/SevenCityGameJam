@@ -40,4 +40,12 @@ public class Player : MonoBehaviour
                 trappedPickups.Add(other.gameObject, 2.0f);
         }
     }
+
+    private void OnCollisionEnter(Collision other)
+    {
+    	if (other.gameObject.CompareTag("Rock"))
+    	{
+    		Debug.Log("Game Over");
+    	}
+    }
 }

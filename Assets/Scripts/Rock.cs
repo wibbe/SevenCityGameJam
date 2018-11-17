@@ -4,17 +4,15 @@ using UnityEngine;
 
 public class Rock : MonoBehaviour
 {
-    public float tumbleSpeed = 0.4f;
+    public float rotationSpeed = 0.4f;
 
-    private Quaternion m_rotation;
+    private Rigidbody m_rigidbody = null;
 
     private void Start()
     {
-        m_rotation = Random.rotationUniform;
-    }
+        transform.rotation = Random.rotationUniform;
 
-    private void Update()
-    {
-        //transform.rotation = transform.rotation * m_rotation * tumbleSpeed * Time.deltaTime;
+        m_rigidbody = GetComponent<Rigidbody>();
+        m_rigidbody.AddTorque(new Vector3(Random.Range(-rotationSpeed, rotationSpeed), Random.Range(-rotationSpeed, rotationSpeed), Random.Range(-rotationSpeed, rotationSpeed)));
     }
 }
