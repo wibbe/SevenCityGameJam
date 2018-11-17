@@ -6,6 +6,8 @@ public class Player : MonoBehaviour
 {
     public float initialForce = 100f;
     public float maxSpeed = 10f;
+    public float energy = 10.0f;
+    public float energyDecay = 0.4f;
 
     private Rigidbody m_body = null;
 
@@ -13,6 +15,11 @@ public class Player : MonoBehaviour
     {
     	m_body = GetComponent<Rigidbody>();    
     	m_body.AddForce(new Vector3(0f, initialForce, 0f));
+    }
+
+    private void Update()
+    {
+        energy -= energyDecay * Time.deltaTime;
     }
 
     private void FixedUpdate()
