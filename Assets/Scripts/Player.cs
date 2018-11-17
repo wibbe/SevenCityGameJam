@@ -50,7 +50,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("Pickup") && Vector3.Distance(transform.position, other.transform.position) < 4.0f)
+        if (other.gameObject.CompareTag("Pickup") && Vector3.Distance(transform.position, other.transform.position) < 4.0f * energy / 10.0f)
         {
             Debug.Log(Vector3.Distance(transform.position, other.transform.position));
             energy += 5f;
