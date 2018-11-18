@@ -12,6 +12,8 @@ public class Player : MonoBehaviour
     public float speed = 30.0f;
     public float minScale = 1f;
     public float maxScale = 3f;
+    public bool playable = true;
+  
 
     [Space]
     public GameManager gameManager = null;
@@ -32,37 +34,53 @@ public class Player : MonoBehaviour
     private float timeSinceLastCollision;
     private float timeSinceLastBounce;
 
+
+    public Transform target { get; set; }
+
     private void Start()
     {
     	m_body = GetComponent<Rigidbody>();    
-    	m_body.AddForce(new Vector3(0f, initialForce, 0f));
+        //if (playable)
+    	    m_body.AddForce(new Vector3(0f, initialForce, 0f));
     }
 
     private void Update()
     {
-        timeSinceLastCollision += Time.deltaTime;
-        timeSinceLastBounce += Time.deltaTime;
-        if (energy > 0f)
+        if (playable)
         {
-            energy -= energyDecay * Time.deltaTime;
-        	float scale = Mathf.Lerp(minScale, maxScale, energy / gameManager.maxEnergy);
-        	transform.localScale = new Vector3(scale, scale, scale);
-        	MainModule ps = GetComponentInChildren<ParticleSystem>().main;
-        	ps.startSizeMultiplier = scale;
+            timeSinceLastCollision += Time.deltaTime;
+            timeSinceLastBounce += Time.deltaTime;
+            if (energy > 0f)
+            {
+                energy -= energyDecay * Time.deltaTime;
+                float scale = Mathf.Lerp(minScale, maxScale, energy / gameManager.maxEnergy);
+                transform.localScale = new Vector3(scale, scale, scale);
+                MainModule ps = GetComponentInChildren<ParticleSystem>().main;
+                ps.startSizeMultiplier = scale;
+            }
         }
     }
 
     private void FixedUpdate()
     {
-        Vector3 velocity = m_body.velocity;
-        velocity.Normalize();
-        m_body.velocity = velocity * speed;
-        m_body.AddForce(velocity * initialForce);
+        //if (playable)
+        {
+            Vector3 velocity = m_body.velocity;
+            velocity.Normalize();
+            m_body.velocity = velocity * speed;
+            m_body.AddForce(velocity * initialForce);
+        }
+
+        if (!playable && target != null)
+        {
+            Vector3 dir = (target.position - transform.position).normalized;
+            m_body.AddForce(dir * 1000f, ForceMode.Acceleration);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("Pickup"))
+        if(playable && other.gameObject.CompareTag("Pickup"))
         {
             other.GetComponent<Pickup>().target = transform;
         }
@@ -70,7 +88,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("Pickup") && Vector3.Distance(transform.position, other.transform.position) < Mathf.Lerp(minScale + 1f, maxScale + 1f, energy / gameManager.maxEnergy))
+        if (playable && other.gameObject.CompareTag("Pickup") && Vector3.Distance(transform.position, other.transform.position) < Mathf.Lerp(minScale + 1f, maxScale + 1f, energy / gameManager.maxEnergy))
         {
             float energyLevel = other.gameObject.GetComponent<Pickup>().energyLevel;
             energy += energyLevel;
@@ -85,14 +103,14 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-    	if (other.gameObject.CompareTag("Rock") && timeSinceLastCollision > 1.0f)
+    	if (playable && other.gameObject.CompareTag("Rock") && timeSinceLastCollision > 1.0f)
         {
             timeSinceLastCollision = 0.0f;
             energy -= other.gameObject.GetComponent<Rock>().energyLevel;
             Instantiate(collisionEffectPrefab, transform.position, Quaternion.identity);
             cameraManager.Shake(1.0f);
         }
-        else if (other.gameObject.CompareTag("Edge") && timeSinceLastBounce > 0.3f)
+        else if (playable && other.gameObject.CompareTag("Edge") && timeSinceLastBounce > 0.3f)
         {
             timeSinceLastBounce = 0.0f;
             Instantiate(bounceEffectPrefab, transform.position, Quaternion.identity);

@@ -163,9 +163,7 @@ public class GameManager : MonoBehaviour
             Vector3 spawnPosition = ray.GetPoint(distance);
             spawnPosition.z = 0f;
 
-            GravityWell well = Instantiate<GravityWell>(gravityWellPrefab, spawnPosition, Quaternion.identity, gravityWellParent);
-            int shaderUniform = m_freeGravityWells.Dequeue();
-            well.Register(this, shaderUniform);
+            SpawnGravityWell(spawnPosition);
         }
 
         if(portal.activeSelf != true && player.energy >= successEnergy) // Open portal
@@ -184,6 +182,16 @@ public class GameManager : MonoBehaviour
 
         energyLevel.sizeDelta = new Vector2((player.energy / maxEnergy) * 600f, 10f);
         energyLeftInLevel.sizeDelta = new Vector2(((player.energy + energyLeft) / maxEnergy) * 600f, 10f);
+    }
+
+    public void SpawnGravityWell(Vector3 position)
+    {
+        if (m_freeGravityWells.Count > 0)
+        {
+            GravityWell well = Instantiate<GravityWell>(gravityWellPrefab, position, Quaternion.identity, gravityWellParent);
+            int shaderUniform = m_freeGravityWells.Dequeue();
+            well.Register(this, shaderUniform);
+        }
     }
 
     public void EnterPortal()
