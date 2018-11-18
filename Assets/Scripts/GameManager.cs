@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
     private bool m_pauseMenuVisible = false;
     private bool m_gameOverMenuVisible = false;
     private bool m_animatingMenu = false;
-    private bool m_inputEnabled = true;
+    public bool inputEnabled = true;
 
     public float maxEnergy { get; private set; }
     public float energyLeft { get; private set; }
@@ -95,7 +95,7 @@ public class GameManager : MonoBehaviour
     {
     }
 
-    private void Start()
+    private void Awake()
     {
         Time.timeScale = 1.0f;
         UnityEngine.Random.InitState(seed);
@@ -163,7 +163,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (!gameOver && m_inputEnabled && Input.GetMouseButtonUp(0) && m_freeGravityWells.Count > 0)
+        if (!gameOver && inputEnabled && Input.GetMouseButtonUp(0) && m_freeGravityWells.Count > 0)
         {
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             Plane plane = new Plane(Vector3.forward, Vector3.zero);
@@ -214,7 +214,7 @@ public class GameManager : MonoBehaviour
     {
         m_pauseMenuVisible = true;
         m_animatingMenu = true;
-        m_inputEnabled = false;
+        inputEnabled = false;
         pauseMenu.gameObject.SetActive(true);
         pauseMenu.alpha = 0f;
 
@@ -234,7 +234,7 @@ public class GameManager : MonoBehaviour
             m_pauseMenuVisible = false;
             pauseMenu.gameObject.SetActive(false);
 
-            m_inputEnabled = true;
+            inputEnabled = true;
         });
 
         Tween.Track().Delay(0.2f).Callback(0f, 1f, 0.4f, (float t) => { Time.timeScale = t; });
@@ -244,7 +244,7 @@ public class GameManager : MonoBehaviour
     {
         m_gameOverMenuVisible = true;
         m_animatingMenu = true;
-        m_inputEnabled = false;
+        inputEnabled = false;
         gameOverMenu.gameObject.SetActive(true);
         gameOverMenu.alpha = 0f;
 
