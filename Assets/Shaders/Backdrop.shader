@@ -53,11 +53,14 @@
             {
                 float3 wellPos = mul(unity_WorldToObject, float4(well.xyz, 1)).xyz;
 				wellPos.z = vertex.z;
-                float3 dir = normalize(wellPos - vertex);
+                //float3 dir = normalize(wellPos - vertex);
+				float dist = distance(wellPos, vertex);
                 float strength = 0;
                 if (well.w > 0)
-                    strength = 1 - clamp(distance(wellPos, vertex) / well.w, 0, 1);
-                return vertex + dir * strength * _PullStrength;
+                    strength = 1 - clamp(dist / well.w, 0, 1);
+
+				strength = pow(strength, _PullStrength);
+				return lerp(vertex, wellPos, strength);
             }
 
             v2f vert (appdata v)
