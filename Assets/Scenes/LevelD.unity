@@ -8181,7 +8181,7 @@ PrefabInstance:
     - target: {fileID: 186096334348916872, guid: b9dc7d353083ddf4e8458a6a4d259397,
         type: 3}
       propertyPath: energySuccessFaction
-      value: 0.6
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 317638014, guid: b9dc7d353083ddf4e8458a6a4d259397, type: 3}
       propertyPath: m_IsActive

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
+  m_IndirectSpecularColor: {r: 0.1273174, g: 0.13414761, b: 0.12107885, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5824,8 +5824,6 @@ Transform:
   - {fileID: 1173302464}
   - {fileID: 1592069189}
   - {fileID: 430074740}
-  - {fileID: 1272160323}
-  - {fileID: 1099289743}
   - {fileID: 738345584}
   - {fileID: 1620735661}
   - {fileID: 254534163}
@@ -5842,6 +5840,7 @@ Transform:
   - {fileID: 1818084442}
   - {fileID: 1185082919}
   - {fileID: 1459622948}
+  - {fileID: 1099289743}
   - {fileID: 141890218}
   - {fileID: 70601078}
   - {fileID: 1057597184}
@@ -5849,6 +5848,7 @@ Transform:
   - {fileID: 970885991}
   - {fileID: 1968902273}
   - {fileID: 2114124462}
+  - {fileID: 1272160323}
   - {fileID: 310378383}
   - {fileID: 790991868}
   - {fileID: 2047537781}
@@ -12155,7 +12155,7 @@ PrefabInstance:
     - target: {fileID: 186096334348916872, guid: b9dc7d353083ddf4e8458a6a4d259397,
         type: 3}
       propertyPath: energySuccessFaction
-      value: 0.5
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 317638014, guid: b9dc7d353083ddf4e8458a6a4d259397, type: 3}
       propertyPath: m_IsActive
@@ -12164,7 +12164,7 @@ PrefabInstance:
     - target: {fileID: 1942584947832369857, guid: b9dc7d353083ddf4e8458a6a4d259397,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5168125036473937373, guid: b9dc7d353083ddf4e8458a6a4d259397,
         type: 3}
