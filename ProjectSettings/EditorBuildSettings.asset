@@ -12,11 +12,38 @@ EditorBuildSettings:
     path: Assets/Scenes/Tutorial.unity
     guid: f8800a1a103489c4ebc69ec306d3fa5f
   - enabled: 1
+    path: Assets/Scenes/LevelA.unity
+    guid: 78c5e4be0780f39418a776cb16a4aa25
+  - enabled: 1
+    path: Assets/Scenes/LevelB.unity
+    guid: 64919de2e4026574286eb27042bf52a1
+  - enabled: 1
+    path: Assets/Scenes/LevelC.unity
+    guid: 110d37e4d500d3f48a62916f4697e6ed
+  - enabled: 1
     path: Assets/Scenes/Level01_Gus.unity
     guid: 62192197d69b8ac4793e87bc555176c2
-  - enabled: 0
-    path: Assets/Scenes/Game.unity
-    guid: 563a1f6e74ac7e04abf713ed21fd80d3
+  - enabled: 1
+    path: Assets/Scenes/LevelE.unity
+    guid: dc6c7f5a414aa924ea512010eb9d2ca1
+  - enabled: 1
+    path: Assets/Scenes/LevelF.unity
+    guid: a73ca011ae2fd25458f205e3a2841cee
+  - enabled: 1
+    path: Assets/Scenes/LevelG.unity
+    guid: 6f167d429ccfed7458faf8643c30ab8e
+  - enabled: 1
+    path: Assets/Scenes/LevelH.unity
+    guid: 239c0929171e9d84491f9d904db47349
+  - enabled: 1
+    path: Assets/Scenes/LevelI.unity
+    guid: 2a87138071d356b448c880db6e2a9ffa
+  - enabled: 1
+    path: Assets/Scenes/LevelJ.unity
+    guid: 7c0b25edeb5af98418b1883c7ac42834
+  - enabled: 1
+    path: Assets/Scenes/LevelK.unity
+    guid: 86e9274ec5b563949bbeabead3a33478
   - enabled: 1
     path: Assets/Scenes/Credits.unity
     guid: d33aa789a57ae234e8f08dbc29ab34eb
