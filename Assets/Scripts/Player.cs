@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     [Space]
     public GameManager gameManager = null;
     public CameraManager cameraManager = null;
+    public GameObject graphics = null;
 
     [Space]
     public AudioClip defeatClip = null;
@@ -46,7 +47,7 @@ public class Player : MonoBehaviour
         {
             energy -= energyDecay * Time.deltaTime;
         	float scale = Mathf.Lerp(minScale, maxScale, energy / gameManager.maxEnergy);
-        	transform.localScale = new Vector3(scale, scale, scale);
+            graphics.transform.localScale = new Vector3(scale, scale, scale);
         	MainModule ps = GetComponentInChildren<ParticleSystem>().main;
         	ps.startSizeMultiplier = scale;
         }
@@ -70,7 +71,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("Pickup") && Vector3.Distance(transform.position, other.transform.position) < Mathf.Lerp(minScale + 1f, maxScale + 1f, energy / gameManager.maxEnergy))
+        if (other.gameObject.CompareTag("Pickup") && Vector3.Distance(transform.position, other.transform.position) < 2.6f)
         {
             float energyLevel = other.gameObject.GetComponent<Pickup>().energyLevel;
             energy += energyLevel;
@@ -85,19 +86,21 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-    	if (other.gameObject.CompareTag("Rock") && timeSinceLastCollision > 1.0f)
+        if (other.gameObject.CompareTag("Rock") && timeSinceLastCollision > 1.0f)
         {
             timeSinceLastCollision = 0.0f;
             energy -= other.gameObject.GetComponent<Rock>().energyLevel;
-            Instantiate(collisionEffectPrefab, transform.position, Quaternion.identity);
+            Instantiate(collisionEffectPrefab, other.contacts[0].point, Quaternion.identity);
             cameraManager.Shake(1.0f);
         }
         else if (other.gameObject.CompareTag("Edge") && timeSinceLastBounce > 0.3f)
         {
             timeSinceLastBounce = 0.0f;
-            Instantiate(bounceEffectPrefab, transform.position, Quaternion.identity);
+            Instantiate(bounceEffectPrefab, other.contacts[0].point, Quaternion.identity);
             cameraManager.Shake(0.6f);
         }
+        else if(!other.gameObject.CompareTag("Rock") && !other.gameObject.CompareTag("Edge"))
+            Debug.LogFormat("{0} collided at distance {1}", other.gameObject.name, Vector3.Distance(transform.position, other.transform.position));
     }
 
     public void PlayDefeatSound()
