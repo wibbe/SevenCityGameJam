@@ -53,11 +53,11 @@ public class GameManager : MonoBehaviour
     private bool m_pauseMenuVisible = false;
     private bool m_animatingPauseMenu = false;
     private bool m_inputEnabled = true;
-    private bool gameOver = false;
 
     public float maxEnergy { get; private set; }
     public float energyLeft { get; private set; }
     public float successEnergy {  get { return maxEnergy * energySuccessFaction; } }
+    public bool gameOver { get; private set; }
 
 
 
@@ -91,7 +91,7 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1.0f;
         UnityEngine.Random.InitState(seed);
-
+        gameOver = false;
         for (int i = 0; i < maxGravityWells; i++)
         {
             int shaderID = Shader.PropertyToID(string.Format("_GravityWell{0}", i));

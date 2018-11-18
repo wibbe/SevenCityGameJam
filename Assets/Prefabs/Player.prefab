@@ -85,6 +85,7 @@ GameObject:
   - component: {fileID: 2005194680}
   - component: {fileID: 2005194681}
   - component: {fileID: 2005194682}
+  - component: {fileID: 7583817684795913575}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -129,13 +130,14 @@ MonoBehaviour:
   maxScale: 3
   gameManager: {fileID: 0}
   cameraManager: {fileID: 0}
+  graphics: {fileID: 8053962164314656360}
   defeatClip: {fileID: 8300000, guid: 8a9fdbfdffa50844786ec4388c1b5e11, type: 3}
   victoryClip: {fileID: 8300000, guid: 1ddc38f238f961d4a9db18f0ab6ea5f5, type: 3}
   audioSource: {fileID: 2005194682}
   flyAudioSource: {fileID: 2005194680}
   pickupEffectPrefab: {fileID: 8864437177359903886, guid: 1db7243f0319cbd4f8f947bd8ea75960,
     type: 3}
-  collisionEffectPrefab: {fileID: 2239066425987261653, guid: b59d6ee3b4590d7439f7e114f56de59a,
+  collisionEffectPrefab: {fileID: 2239066425987261653, guid: e4dbed9bcb50a2e47b6665e723461319,
     type: 3}
   bounceEffectPrefab: {fileID: 5899037862887501464, guid: 64299932ec383ef42b29de008d506100,
     type: 3}
@@ -464,6 +466,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!135 &7583817684795913575
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4754626498609225473}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5509658205144978708
 GameObject:
   m_ObjectHideFlags: 0
@@ -5182,7 +5197,6 @@ GameObject:
   - component: {fileID: 3400362826677325640}
   - component: {fileID: 6004772096476656228}
   - component: {fileID: 2066958868857318705}
-  - component: {fileID: 4399414127216902928}
   m_Layer: 0
   m_Name: Pull
   m_TagString: Untagged
@@ -5249,16 +5263,3 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &4399414127216902928
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8053962164314656360}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 5
-  m_Center: {x: 0, y: 0, z: 0}

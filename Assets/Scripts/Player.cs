@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     [Space]
     public GameManager gameManager = null;
     public CameraManager cameraManager = null;
+    public GameObject graphics = null;
 
     [Space]
     public AudioClip defeatClip = null;
@@ -40,8 +41,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
     	m_body = GetComponent<Rigidbody>();    
-        //if (playable)
-    	    m_body.AddForce(new Vector3(0f, initialForce, 0f));
+    	m_body.AddForce(new Vector3(0f, initialForce, 0f));
     }
 
     private void Update()
@@ -54,7 +54,7 @@ public class Player : MonoBehaviour
             {
                 energy -= energyDecay * Time.deltaTime;
                 float scale = Mathf.Lerp(minScale, maxScale, energy / gameManager.maxEnergy);
-                transform.localScale = new Vector3(scale, scale, scale);
+                graphics.transform.localScale = new Vector3(scale, scale, scale);
                 MainModule ps = GetComponentInChildren<ParticleSystem>().main;
                 ps.startSizeMultiplier = scale;
             }
@@ -88,7 +88,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (playable && other.gameObject.CompareTag("Pickup") && Vector3.Distance(transform.position, other.transform.position) < Mathf.Lerp(minScale + 1f, maxScale + 1f, energy / gameManager.maxEnergy))
+        if (playable && other.gameObject.CompareTag("Pickup") && Vector3.Distance(transform.position, other.transform.position) < 2.6f)
         {
             float energyLevel = other.gameObject.GetComponent<Pickup>().energyLevel;
             energy += energyLevel;
@@ -107,13 +107,13 @@ public class Player : MonoBehaviour
         {
             timeSinceLastCollision = 0.0f;
             energy -= other.gameObject.GetComponent<Rock>().energyLevel;
-            Instantiate(collisionEffectPrefab, transform.position, Quaternion.identity);
+            Instantiate(collisionEffectPrefab, other.contacts[0].point, Quaternion.identity);
             cameraManager.Shake(1.0f);
         }
         else if (playable && other.gameObject.CompareTag("Edge") && timeSinceLastBounce > 0.3f)
         {
             timeSinceLastBounce = 0.0f;
-            Instantiate(bounceEffectPrefab, transform.position, Quaternion.identity);
+            Instantiate(bounceEffectPrefab, other.contacts[0].point, Quaternion.identity);
             cameraManager.Shake(0.6f);
         }
     }
