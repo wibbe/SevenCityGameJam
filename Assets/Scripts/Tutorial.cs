@@ -29,7 +29,7 @@ public class Tutorial : MonoBehaviour
     {
         gameManager.inputEnabled = false;
 
-        Tween.Track().Delay(0.5f).Callback(1f, 0f, 2f, (float t) => { Time.timeScale = t; });
-        Tween.Track().Delay(0.5f).Alpha(root, 1f, 1f);
+        Tween.Track().Delay(0.1f).Callback(1f, 0f, 2f, (float t) => { Time.timeScale = t; });
+        Tween.Track().Delay(0.1f).Alpha(root, 1f, 1f);
     }
 }

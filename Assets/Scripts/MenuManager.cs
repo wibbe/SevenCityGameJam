@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Skillster.Animation;
 using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
@@ -8,11 +9,14 @@ public class MenuManager : MonoBehaviour
     public GameManager gameManager;
     public Player player;
     public Transform[] playerTargets;
+    public RectTransform menu;
+    public RectTransform levelSelect;
 
 
     public void Play()
     {
-        SceneManager.LoadScene(1);
+        Tween.Pivot(menu, new Vector2(1.5f, 0.5f), 0.4f);
+        Tween.Pivot(levelSelect, new Vector2(0.5f, 0.5f), 0.4f);
     }
 
     public void Quit()
@@ -21,15 +25,32 @@ public class MenuManager : MonoBehaviour
         Application.Quit();
     }
 
-    public void Menu()
+    public void OnMenu()
     {
         SceneManager.LoadScene(0);
     }
 
+    public void OnBack()
+    {
+        Tween.Pivot(menu, new Vector2(0.5f, 0.5f), 0.4f);
+        Tween.Pivot(levelSelect, new Vector2(-0.5f, 0.5f), 0.4f);
+    }
+
+    public void OnCredits()
+    {
+        int creditScene = SceneManager.sceneCountInBuildSettings - 1;
+        SceneManager.LoadScene(creditScene);
+    }
+
     private void Start()
     {
+        if (menu != null)
+            menu.pivot = new Vector2(0.5f, 0.5f);
+
+        if (levelSelect != null)
+            levelSelect.pivot = new Vector2(-0.5f, 0.5f);
+
         Time.timeScale = 1f;
-        //StartCoroutine(GravityWellSpawner());
         StartCoroutine(ControlPlayer());
     }
 

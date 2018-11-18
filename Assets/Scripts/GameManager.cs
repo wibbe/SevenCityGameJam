@@ -49,19 +49,25 @@ public class GameManager : MonoBehaviour
     public CanvasGroup pauseMenu = null;
     public CanvasGroup gameOverMenu = null;
     public CanvasGroup gameDoneMenu = null;
+    public TextMeshProUGUI timeText = null;
+    public TextMeshProUGUI pickupText = null;
+    public bool inputEnabled = true;
 
 
     private Queue<int> m_freeGravityWells = new Queue<int>();
     private bool m_pauseMenuVisible = false;
     private bool m_gameOverMenuVisible = false;
     private bool m_animatingMenu = false;
-    public bool inputEnabled = true;
+    private float gameTime = 0.0f;
+    private int initalNumberOfPickups;
+
 
     public float maxEnergy { get; private set; }
     public float energyLeft { get; private set; }
     public float successEnergy {  get { return maxEnergy * energySuccessFaction; } }
     public bool gameOver { get; private set; }
     public bool levelDone { get; private set; }
+    public int pickupsTaken { get; set; }
 
 
     public void RemoveWell(int shaderUniform)
@@ -84,9 +90,7 @@ public class GameManager : MonoBehaviour
     public void OnNextLevel()
     {
         int sceneIndex = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(sceneIndex);
-        //SceneManager.LoadScene(sceneIndex + 1); When we have more levels
-        // Also check if it's the last level
+        SceneManager.LoadScene(sceneIndex + 1);
     }
 
     public void OnRetry()
@@ -110,6 +114,7 @@ public class GameManager : MonoBehaviour
         UnityEngine.Random.InitState(seed);
         gameOver = false;
         levelDone = false;
+        pickupsTaken = 0;
         for (int i = 0; i < maxGravityWells; i++)
         {
             int shaderID = Shader.PropertyToID(string.Format("_GravityWell{0}", i));
@@ -142,7 +147,9 @@ public class GameManager : MonoBehaviour
         // Starting energy
         maxEnergy = player.energy;
 
+
         Pickup[] pickups = FindObjectsOfType<Pickup>();
+        initalNumberOfPickups = pickups.Length;
         for (int i = 0; i < pickups.Length; i++)
         {
             if (pickups[i].transform.parent != pickupParent)
@@ -199,6 +206,13 @@ public class GameManager : MonoBehaviour
 
         energyLevel.sizeDelta = new Vector2((player.energy / maxEnergy) * 600f, 10f);
         energyLeftInLevel.sizeDelta = new Vector2(((player.energy + energyLeft) / maxEnergy) * 600f, 10f);
+
+        if (!gameOver)
+        {
+            gameTime += Time.deltaTime;
+            timeText.text = String.Format("Time: {0}:{1:00}", (int)gameTime / 60, gameTime % 60);
+            pickupText.text = String.Format("Energy balls: {0}/{1}", pickupsTaken, initalNumberOfPickups);
+        }
     }
 
     public void SpawnGravityWell(Vector3 position)
@@ -214,6 +228,17 @@ public class GameManager : MonoBehaviour
     public void EnterPortal()
     {
         // Win
+        int sceneIndex = SceneManager.GetActiveScene().buildIndex;
+        
+        // Unlock the next level
+        PlayerPrefs.SetInt(string.Format("Level.Unlocked.{0}", sceneIndex + 1), 1);
+
+        // Update best time if it's smaller than previous run
+        float lastBestTime = PlayerPrefs.GetFloat(string.Format("Level.BestTime.{0}", sceneIndex), 0f);
+
+        if (lastBestTime <= 0f || gameTime < lastBestTime)
+            PlayerPrefs.SetFloat(string.Format("Level.BestTime.{0}", sceneIndex), gameTime);
+
         levelDone = true;
         player.PlayVictorySound();
         StartCoroutine(End(1.0f));
