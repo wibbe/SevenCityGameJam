@@ -268,7 +268,7 @@ public class GameManager : MonoBehaviour
     private void ShowGameDoneMenu()
     {
         m_animatingMenu = true;
-        m_inputEnabled = false;
+        inputEnabled = false;
         gameDoneMenu.gameObject.SetActive(true);
         gameDoneMenu.alpha = 0f;
 
