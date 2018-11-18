@@ -6,6 +6,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2404806623050557850}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &7024146506922964598 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2695076048711412927, guid: 2e2a3d79460307346971ef5f5e20603a,
+    type: 3}
+  m_PrefabInstance: {fileID: 4907830040624552649}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3106940814492465966
 GameObject:
   m_ObjectHideFlags: 0
@@ -67,6 +73,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e033dad59f9fec3498a36f4363edeea7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  warpEffect: {fileID: 1329845292236604, guid: c7c5b4936df799842a4b4f856fc6a892, type: 3}
 --- !u!135 &3129544030008558666
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -176,12 +183,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!4 &7024146506922964598 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2695076048711412927, guid: 2e2a3d79460307346971ef5f5e20603a,
-    type: 3}
-  m_PrefabInstance: {fileID: 4907830040624552649}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2404806623050557850
 PrefabInstance:
   m_ObjectHideFlags: 0
