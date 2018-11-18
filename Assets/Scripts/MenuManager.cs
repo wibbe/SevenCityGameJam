@@ -21,6 +21,11 @@ public class MenuManager : MonoBehaviour
         Application.Quit();
     }
 
+    public void Menu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     private void Start()
     {
         Time.timeScale = 1f;
