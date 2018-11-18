@@ -1,11 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!4 &4418505151828399069 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 400000, guid: 71df00795b05ad84fa5cb98a48a1670e,
-    type: 3}
-  m_PrefabInstance: {fileID: 4418505151828003165}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1636165053682408540
 GameObject:
   m_ObjectHideFlags: 0
@@ -52,7 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 912bd2d5de12aa94f9a83852ca0f505e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 1
+  energyLevel: 20
+  rotationSpeed: 2
 --- !u!54 &5005065110016199234
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -64,7 +59,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 8
@@ -82,6 +77,12 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 6.15
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &4418505151828399069 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400000, guid: 71df00795b05ad84fa5cb98a48a1670e,
+    type: 3}
+  m_PrefabInstance: {fileID: 4418505151828003165}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4418505151828003165
 PrefabInstance:
   m_ObjectHideFlags: 0

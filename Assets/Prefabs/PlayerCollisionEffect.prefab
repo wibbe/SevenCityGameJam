@@ -1,5 +1,11 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!4 &6695124549183172040 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4388947112716342, guid: 6ae49ed6d814e1542959debbb3b608d1,
+    type: 3}
+  m_PrefabInstance: {fileID: 6694121421445531134}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2239066425987261653
 GameObject:
   m_ObjectHideFlags: 0
@@ -12,7 +18,7 @@ GameObject:
   - component: {fileID: 2239066425987261652}
   - component: {fileID: 6877864519190107943}
   m_Layer: 0
-  m_Name: CollisionEffect
+  m_Name: PlayerCollisionEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -142,12 +148,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 1.2
---- !u!4 &6695124549183172040 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4388947112716342, guid: 6ae49ed6d814e1542959debbb3b608d1,
-    type: 3}
-  m_PrefabInstance: {fileID: 6694121421445531134}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6694121421445531134
 PrefabInstance:
   m_ObjectHideFlags: 0

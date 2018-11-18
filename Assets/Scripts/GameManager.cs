@@ -47,18 +47,20 @@ public class GameManager : MonoBehaviour
     public RectTransform energyLeftInLevel = null;
     public RectTransform winLevel = null;
     public CanvasGroup pauseMenu = null;
+    public CanvasGroup gameOverMenu = null;
 
 
     private Queue<int> m_freeGravityWells = new Queue<int>();
     private bool m_pauseMenuVisible = false;
-    private bool m_animatingPauseMenu = false;
+    private bool m_gameOverMenuVisible = false;
+    private bool m_animatingMenu = false;
     private bool m_inputEnabled = true;
-    private bool gameOver = false;
 
     public float maxEnergy { get; private set; }
     public float energyLeft { get; private set; }
     public float successEnergy {  get { return maxEnergy * energySuccessFaction; } }
-
+    public bool gameOver { get; private set; }
+    public bool levelDone { get; private set; }
 
 
     public void RemoveWell(int shaderUniform)
@@ -74,8 +76,14 @@ public class GameManager : MonoBehaviour
 
     public void OnContinue()
     {
-        if (m_pauseMenuVisible && !m_animatingPauseMenu)
+        if (m_pauseMenuVisible && !m_animatingMenu)
             ContinueGame();
+    }
+
+    public void OnRetry()
+    {
+        int sceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(sceneIndex);
     }
 
     public void OnQuit()
@@ -91,7 +99,8 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1.0f;
         UnityEngine.Random.InitState(seed);
-
+        gameOver = false;
+        levelDone = false;
         for (int i = 0; i < maxGravityWells; i++)
         {
             int shaderID = Shader.PropertyToID(string.Format("_GravityWell{0}", i));
@@ -142,13 +151,13 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !gameOver)
         {
-            if (!m_pauseMenuVisible && !m_animatingPauseMenu)
+            if (!m_pauseMenuVisible && !m_animatingMenu)
             {
                 PauseGame();
             }
-            else if (m_pauseMenuVisible && !m_animatingPauseMenu)
+            else if (m_pauseMenuVisible && !m_animatingMenu)
             {
                 ContinueGame();
             }
@@ -163,12 +172,10 @@ public class GameManager : MonoBehaviour
             Vector3 spawnPosition = ray.GetPoint(distance);
             spawnPosition.z = 0f;
 
-            GravityWell well = Instantiate<GravityWell>(gravityWellPrefab, spawnPosition, Quaternion.identity, gravityWellParent);
-            int shaderUniform = m_freeGravityWells.Dequeue();
-            well.Register(this, shaderUniform);
+            SpawnGravityWell(spawnPosition);
         }
 
-        if(portal.activeSelf != true && player.energy >= successEnergy) // Open portal
+        if (portal.activeSelf != true && player.energy >= successEnergy) // Open portal
         {
             portal.SetActive(true);
         }
@@ -177,7 +184,6 @@ public class GameManager : MonoBehaviour
         {
             // Game over
             Debug.LogFormat("Game Over - EnergyLeft: {0}, SuccessEnergy: {1}, PlayerEnergy: {2}", energyLeft, successEnergy, player.energy);
-            gameOver = true;
             player.PlayDefeatSound();
             StartCoroutine(End(2.0f));
         }
@@ -186,18 +192,28 @@ public class GameManager : MonoBehaviour
         energyLeftInLevel.sizeDelta = new Vector2(((player.energy + energyLeft) / maxEnergy) * 600f, 10f);
     }
 
+    public void SpawnGravityWell(Vector3 position)
+    {
+        if (m_freeGravityWells.Count > 0)
+        {
+            GravityWell well = Instantiate<GravityWell>(gravityWellPrefab, position, Quaternion.identity, gravityWellParent);
+            int shaderUniform = m_freeGravityWells.Dequeue();
+            well.Register(this, shaderUniform);
+        }
+    }
+
     public void EnterPortal()
     {
         // Win
-        gameOver = true;
+        levelDone = true;
         player.PlayVictorySound();
-        StartCoroutine(End(2.0f));
+        StartCoroutine(End(1.0f));
     }
 
     private void PauseGame()
     {
         m_pauseMenuVisible = true;
-        m_animatingPauseMenu = true;
+        m_animatingMenu = true;
         m_inputEnabled = false;
         pauseMenu.gameObject.SetActive(true);
         pauseMenu.alpha = 0f;
@@ -206,7 +222,7 @@ public class GameManager : MonoBehaviour
 
         Tween.Track().Alpha(pauseMenu, 1f, 0.4f).Action(() =>
         {
-            m_animatingPauseMenu = false;
+            m_animatingMenu = false;
         });
     }
 
@@ -214,7 +230,7 @@ public class GameManager : MonoBehaviour
     {
         Tween.Track().Alpha(pauseMenu, 0f, 0.4f).Action(() =>
         {
-            m_animatingPauseMenu = false;
+            m_animatingMenu = false;
             m_pauseMenuVisible = false;
             pauseMenu.gameObject.SetActive(false);
 
@@ -224,14 +240,35 @@ public class GameManager : MonoBehaviour
         Tween.Track().Delay(0.2f).Callback(0f, 1f, 0.4f, (float t) => { Time.timeScale = t; });
     }
 
+    private void ShowGameOverMenu()
+    {
+        m_gameOverMenuVisible = true;
+        m_animatingMenu = true;
+        m_inputEnabled = false;
+        gameOverMenu.gameObject.SetActive(true);
+        gameOverMenu.alpha = 0f;
+
+        Tween.Callback(1f, 0f, 0.4f, (float t) => { Time.timeScale = t; });
+
+        Tween.Track().Alpha(gameOverMenu, 1f, 0.4f).Action(() =>
+        {
+            m_animatingMenu = false;
+        });
+    }
+
     private IEnumerator End(float endTime)
     {
+        gameOver = true;
         float time = 0.0f;
         while (time < endTime)
         {
             time += Time.unscaledDeltaTime;
             yield return null;
         }
-        SceneManager.LoadScene("Menu");
+
+        if (levelDone)
+            SceneManager.LoadScene("Menu");
+        else
+            ShowGameOverMenu();
     }
 }

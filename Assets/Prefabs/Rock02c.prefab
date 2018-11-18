@@ -52,7 +52,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 912bd2d5de12aa94f9a83852ca0f505e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  energyLevel: 20
   rotationSpeed: 1
+  collisionEffectPrefab: {fileID: 2239066425987261653, guid: b59d6ee3b4590d7439f7e114f56de59a,
+    type: 3}
 --- !u!54 &6887809511192584727
 Rigidbody:
   m_ObjectHideFlags: 0
