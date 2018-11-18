@@ -90,9 +90,7 @@ public class GameManager : MonoBehaviour
     public void OnNextLevel()
     {
         int sceneIndex = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(sceneIndex);
-        //SceneManager.LoadScene(sceneIndex + 1); When we have more levels
-        // Also check if it's the last level
+        SceneManager.LoadScene(sceneIndex + 1);
     }
 
     public void OnRetry()
@@ -237,7 +235,9 @@ public class GameManager : MonoBehaviour
 
         // Update best time if it's smaller than previous run
         float lastBestTime = PlayerPrefs.GetFloat(string.Format("Level.BestTime.{0}", sceneIndex), 0f);
-        PlayerPrefs.SetFloat(string.Format("Level.BestTime.{0}", sceneIndex), lastBestTime);
+
+        if (lastBestTime <= 0f || gameTime < lastBestTime)
+            PlayerPrefs.SetFloat(string.Format("Level.BestTime.{0}", sceneIndex), gameTime);
 
         levelDone = true;
         player.PlayVictorySound();

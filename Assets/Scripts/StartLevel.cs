@@ -29,7 +29,7 @@ public class StartLevel : MonoBehaviour
             int minutes = Mathf.FloorToInt(bestTime / 60f);
             int seconds = Mathf.FloorToInt(bestTime - (minutes * 60f));
 
-            bestTimeText.text = string.Format("Best Time\n{0:00}:{1:00}", minutes, seconds);
+            bestTimeText.text = string.Format("Best Time\n{0}:{1:00}", minutes, seconds);
         }
         else
         {
