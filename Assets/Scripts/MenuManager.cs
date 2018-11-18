@@ -11,33 +11,41 @@ public class MenuManager : MonoBehaviour
     public Transform[] playerTargets;
     public RectTransform menu;
     public RectTransform levelSelect;
+    public AudioClip menuSound;
+
+    private AudioSource audioSource;
 
 
     public void Play()
     {
+        audioSource.Play();
         Tween.Pivot(menu, new Vector2(1.5f, 0.5f), 0.4f);
         Tween.Pivot(levelSelect, new Vector2(0.5f, 0.5f), 0.4f);
     }
 
     public void Quit()
     {
+        audioSource.Play();
         Debug.Log("Quit");
         Application.Quit();
     }
 
     public void OnMenu()
     {
+        audioSource.Play();
         SceneManager.LoadScene(0);
     }
 
     public void OnBack()
     {
+        audioSource.Play();
         Tween.Pivot(menu, new Vector2(0.5f, 0.5f), 0.4f);
         Tween.Pivot(levelSelect, new Vector2(-0.5f, 0.5f), 0.4f);
     }
 
     public void OnCredits()
     {
+        audioSource.Play();
         int creditScene = SceneManager.sceneCountInBuildSettings - 1;
         SceneManager.LoadScene(creditScene);
     }
@@ -49,6 +57,8 @@ public class MenuManager : MonoBehaviour
 
         if (levelSelect != null)
             levelSelect.pivot = new Vector2(-0.5f, 0.5f);
+
+        audioSource = GetComponent<AudioSource>();
 
         Time.timeScale = 1f;
         StartCoroutine(ControlPlayer());
