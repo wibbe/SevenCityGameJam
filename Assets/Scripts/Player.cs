@@ -93,7 +93,7 @@ public class Player : MonoBehaviour
             float energyLevel = other.gameObject.GetComponent<Pickup>().energyLevel;
             energy += energyLevel;
             gameManager.RemoveEnergyLeft(energyLevel);
-
+            gameManager.pickupsTaken++;
             Destroy(other.gameObject);
             Instantiate(pickupEffectPrefab, transform.position, Quaternion.identity);
 
