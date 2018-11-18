@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Skillster.Animation;
 
 public class Tutorial : MonoBehaviour
@@ -11,6 +12,7 @@ public class Tutorial : MonoBehaviour
     public Transform enemy;
 
     public CanvasGroup root;
+    public Button button;
 
 
     public void OnLetsGo()
@@ -28,8 +30,10 @@ public class Tutorial : MonoBehaviour
     private void Start()
     {
         gameManager.inputEnabled = false;
+        button.interactable = false;
 
-        Tween.Track().Delay(0.1f).Callback(1f, 0f, 2f, (float t) => { Time.timeScale = t; });
+        Tween.Track().Delay(0.1f).Callback(1f, 0f, 1.8f, (float t) => { Time.timeScale = t; });
         Tween.Track().Delay(0.1f).Alpha(root, 1f, 1f);
+        Tween.Track().Delay(4f).Action(() => { button.interactable = true; });
     }
 }
