@@ -2955,7 +2955,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 186096334348916872}
-        m_MethodName: OnRetry
+        m_MethodName: OnNextLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
