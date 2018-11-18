@@ -34,7 +34,7 @@ public class Portal : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && !gameManager.gameOver)
         {
             Instantiate(warpEffect, collision.gameObject.transform.position, Quaternion.identity);
             collision.gameObject.GetComponent<Player>().graphics.SetActive(false);
