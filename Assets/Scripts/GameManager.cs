@@ -214,6 +214,15 @@ public class GameManager : MonoBehaviour
     public void EnterPortal()
     {
         // Win
+        int sceneIndex = SceneManager.GetActiveScene().buildIndex;
+        
+        // Unlock the next level
+        PlayerPrefs.SetInt(string.Format("Level.Unlocked.{0}", sceneIndex + 1), 1);
+
+        // Update best time if it's smaller than previous run
+        float lastBestTime = PlayerPrefs.GetFloat(string.Format("Level.BestTime.{0}", sceneIndex), 0f);
+        PlayerPrefs.SetFloat(string.Format("Level.BestTime.{0}", sceneIndex), lastBestTime);
+
         levelDone = true;
         player.PlayVictorySound();
         StartCoroutine(End(1.0f));
