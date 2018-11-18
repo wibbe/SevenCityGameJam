@@ -128,6 +128,7 @@ MonoBehaviour:
   speed: 50
   minScale: 1
   maxScale: 3
+  playable: 1
   gameManager: {fileID: 0}
   cameraManager: {fileID: 0}
   graphics: {fileID: 8053962164314656360}
@@ -526,7 +527,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 1
-  prewarm: 1
+  prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1

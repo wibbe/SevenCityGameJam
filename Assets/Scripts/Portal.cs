@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Portal : MonoBehaviour
 {
+    public GameObject warpEffect = null;
     private GameManager gameManager = null;
     private Rigidbody targetRigidbody = null;
     private float force = 500.0f;
@@ -35,7 +36,8 @@ public class Portal : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Time.timeScale = 0.0f;
+            Instantiate(warpEffect, collision.gameObject.transform.position, Quaternion.identity);
+            collision.gameObject.GetComponent<Player>().graphics.SetActive(false);
             gameManager.EnterPortal();
         }
     }
