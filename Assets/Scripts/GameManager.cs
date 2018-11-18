@@ -48,6 +48,7 @@ public class GameManager : MonoBehaviour
     public RectTransform winLevel = null;
     public CanvasGroup pauseMenu = null;
     public CanvasGroup gameOverMenu = null;
+    public CanvasGroup gameDoneMenu = null;
 
 
     private Queue<int> m_freeGravityWells = new Queue<int>();
@@ -78,6 +79,14 @@ public class GameManager : MonoBehaviour
     {
         if (m_pauseMenuVisible && !m_animatingMenu)
             ContinueGame();
+    }
+
+    public void OnNextLevel()
+    {
+        int sceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(sceneIndex);
+        //SceneManager.LoadScene(sceneIndex + 1); When we have more levels
+        // Also check if it's the last level
     }
 
     public void OnRetry()
@@ -256,6 +265,21 @@ public class GameManager : MonoBehaviour
         });
     }
 
+    private void ShowGameDoneMenu()
+    {
+        m_animatingMenu = true;
+        m_inputEnabled = false;
+        gameDoneMenu.gameObject.SetActive(true);
+        gameDoneMenu.alpha = 0f;
+
+        Tween.Callback(1f, 0f, 0.4f, (float t) => { Time.timeScale = t; });
+
+        Tween.Track().Alpha(gameDoneMenu, 1f, 0.4f).Action(() =>
+        {
+            m_animatingMenu = false;
+        });
+    }
+
     private IEnumerator End(float endTime)
     {
         gameOver = true;
@@ -267,7 +291,7 @@ public class GameManager : MonoBehaviour
         }
 
         if (levelDone)
-            SceneManager.LoadScene("Menu");
+            ShowGameDoneMenu();
         else
             ShowGameOverMenu();
     }
