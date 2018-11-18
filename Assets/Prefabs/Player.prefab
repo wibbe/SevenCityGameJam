@@ -137,7 +137,7 @@ MonoBehaviour:
   flyAudioSource: {fileID: 2005194680}
   pickupEffectPrefab: {fileID: 8864437177359903886, guid: 1db7243f0319cbd4f8f947bd8ea75960,
     type: 3}
-  collisionEffectPrefab: {fileID: 2239066425987261653, guid: b59d6ee3b4590d7439f7e114f56de59a,
+  collisionEffectPrefab: {fileID: 2239066425987261653, guid: e4dbed9bcb50a2e47b6665e723461319,
     type: 3}
   bounceEffectPrefab: {fileID: 5899037862887501464, guid: 64299932ec383ef42b29de008d506100,
     type: 3}

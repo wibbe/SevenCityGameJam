@@ -18,6 +18,7 @@ public class Pickup : MonoBehaviour
         initialScale = transform.localScale.x;
         m_rigidbody = GetComponent<Rigidbody>();
         m_rigidbody.AddTorque(new Vector3(Random.Range(-rotationSpeed, rotationSpeed), Random.Range(-rotationSpeed, rotationSpeed), Random.Range(-rotationSpeed, rotationSpeed)));
+        Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<SphereCollider>(), GetComponent<Collider>());
     }
 
     private void Update()
